@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/06/2017 19:11:28 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="classes.Sequences" table="sequences" schema="public" optimistic-lock="version">
+        <id name="secodigo" type="int">
+            <column name="secodigo" />
+            <generator class="assigned" />
+        </id>
+        <property name="genempresa" type="java.lang.Integer">
+            <column name="genempresa" />
+        </property>
+        <property name="genusuario" type="java.lang.Integer">
+            <column name="genusuario" />
+        </property>
+        <property name="genclientes" type="java.lang.Integer">
+            <column name="genclientes" />
+        </property>
+        <property name="genpedidos" type="java.lang.Integer">
+            <column name="genpedidos" />
+        </property>
+        <property name="gengrupos" type="java.lang.Integer">
+            <column name="gengrupos" />
+        </property>
+        <property name="genprodutos" type="java.lang.Integer">
+            <column name="genprodutos" />
+        </property>
+        <property name="genformaspgto" type="java.lang.Integer">
+            <column name="genformaspgto" />
+        </property>
+        <property name="gentabelaprecos" type="java.lang.Integer">
+            <column name="gentabelaprecos" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/06/2017 19:11:28 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="classes.Clientes" table="clientes" schema="public" optimistic-lock="version">
+        <composite-id name="id" class="classes.ClientesId">
+            <key-property name="clempresa" type="int">
+                <column name="clempresa" />
+            </key-property>
+            <key-property name="clcodigo" type="int">
+                <column name="clcodigo" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="empresa" class="classes.Empresa" update="false" insert="false" fetch="select">
+            <column name="clempresa" not-null="true" />
+        </many-to-one>
+        <property name="clmatricula" type="string">
+            <column name="clmatricula" length="20" />
+        </property>
+        <property name="clnome" type="string">
+            <column name="clnome" length="80" />
+        </property>
+        <property name="clendereco" type="string">
+            <column name="clendereco" length="100" />
+        </property>
+        <property name="clcidade" type="string">
+            <column name="clcidade" length="50" />
+        </property>
+        <property name="clbairro" type="string">
+            <column name="clbairro" length="30" />
+        </property>
+        <property name="cluf" type="string">
+            <column name="cluf" length="2" />
+        </property>
+        <property name="clcep" type="string">
+            <column name="clcep" length="9" />
+        </property>
+        <property name="clfone" type="string">
+            <column name="clfone" length="30" />
+        </property>
+        <property name="clemail" type="string">
+            <column name="clemail" length="100" />
+        </property>
+        <property name="clcpf" type="string">
+            <column name="clcpf" length="11" />
+        </property>
+        <property name="clcnpj" type="string">
+            <column name="clcnpj" length="14" />
+        </property>
+        <property name="clinativo" type="string">
+            <column name="clinativo" length="1" />
+        </property>
+        <property name="cldataatu" type="date">
+            <column name="cldataatu" length="13" not-null="true" />
+        </property>
+        <property name="clhoraatu" type="time">
+            <column name="clhoraatu" length="15" not-null="true" />
+        </property>
+        <set name="pedidoses" table="pedidos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="pecliente" not-null="true" />
+                <column name="peempresa" not-null="true" />
+            </key>
+            <one-to-many class="classes.Pedidos" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/06/2017 19:11:28 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="classes.Grupos" table="grupos" schema="public" optimistic-lock="version">
+        <composite-id name="id" class="classes.GruposId">
+            <key-property name="grempresa" type="int">
+                <column name="grempresa" />
+            </key-property>
+            <key-property name="grcodigo" type="int">
+                <column name="grcodigo" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="empresa" class="classes.Empresa" update="false" insert="false" fetch="select">
+            <column name="grempresa" not-null="true" />
+        </many-to-one>
+        <property name="grnome" type="string">
+            <column name="grnome" length="50" />
+        </property>
+        <property name="grdataatu" type="date">
+            <column name="grdataatu" length="13" not-null="true" />
+        </property>
+        <property name="grhoraatu" type="time">
+            <column name="grhoraatu" length="15" not-null="true" />
+        </property>
+        <set name="produtoses" table="produtos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="prgrupo" not-null="true" />
+                <column name="prempresa" not-null="true" />
+            </key>
+            <one-to-many class="classes.Produtos" />
+        </set>
+    </class>
+</hibernate-mapping>

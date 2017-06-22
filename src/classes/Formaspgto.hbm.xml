@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/06/2017 19:11:28 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="classes.Formaspgto" table="formaspgto" schema="public" optimistic-lock="version">
+        <composite-id name="id" class="classes.FormaspgtoId">
+            <key-property name="fpempresa" type="int">
+                <column name="fpempresa" />
+            </key-property>
+            <key-property name="fpcodigo" type="int">
+                <column name="fpcodigo" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="empresa" class="classes.Empresa" update="false" insert="false" fetch="select">
+            <column name="fpempresa" not-null="true" />
+        </many-to-one>
+        <property name="fpdescricao" type="string">
+            <column name="fpdescricao" length="100" />
+        </property>
+        <property name="fpnrovezes" type="java.lang.Integer">
+            <column name="fpnrovezes" />
+        </property>
+        <property name="fpdataatu" type="date">
+            <column name="fpdataatu" length="13" />
+        </property>
+        <property name="fphoraatu" type="time">
+            <column name="fphoraatu" length="15" />
+        </property>
+        <set name="pedidoses" table="pedidos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="peformapgto" not-null="true" />
+                <column name="peempresa" not-null="true" />
+            </key>
+            <one-to-many class="classes.Pedidos" />
+        </set>
+    </class>
+</hibernate-mapping>

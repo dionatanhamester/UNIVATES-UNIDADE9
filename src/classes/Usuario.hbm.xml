@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/06/2017 19:11:28 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="classes.Usuario" table="usuario" schema="public" optimistic-lock="version">
+        <composite-id name="id" class="classes.UsuarioId">
+            <key-property name="uscodigo" type="int">
+                <column name="uscodigo" />
+            </key-property>
+            <key-property name="usempresa" type="int">
+                <column name="usempresa" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="empresa" class="classes.Empresa" update="false" insert="false" fetch="select">
+            <column name="usempresa" not-null="true" />
+        </many-to-one>
+        <property name="usnome" type="string">
+            <column name="usnome" length="50" />
+        </property>
+        <property name="uscpf" type="string">
+            <column name="uscpf" length="11" />
+        </property>
+        <property name="uscnpj" type="string">
+            <column name="uscnpj" length="14" />
+        </property>
+        <property name="uscep" type="string">
+            <column name="uscep" length="9" />
+        </property>
+        <property name="usuf" type="string">
+            <column name="usuf" length="2" />
+        </property>
+        <property name="usbairro" type="string">
+            <column name="usbairro" length="30" />
+        </property>
+        <property name="uscidade" type="string">
+            <column name="uscidade" length="50" />
+        </property>
+        <property name="usendereco" type="string">
+            <column name="usendereco" length="100" not-null="true" />
+        </property>
+        <property name="usemail" type="string">
+            <column name="usemail" length="50" not-null="true" />
+        </property>
+        <property name="ustelefone" type="string">
+            <column name="ustelefone" length="20" />
+        </property>
+        <property name="ussenhamd5" type="string">
+            <column name="ussenhamd5" length="100" />
+        </property>
+        <property name="ustipoacesso" type="string">
+            <column name="ustipoacesso" length="10" />
+        </property>
+        <set name="pedidoses" table="pedidos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="peusuario" not-null="true" />
+                <column name="peempresa" not-null="true" />
+            </key>
+            <one-to-many class="classes.Pedidos" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/06/2017 19:11:28 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="classes.Empresa" table="empresa" schema="public" optimistic-lock="version">
+        <id name="emcodigo" type="int">
+            <column name="emcodigo" />
+            <generator class="assigned" />
+        </id>
+        <property name="emrazaosocial" type="string">
+            <column name="emrazaosocial" length="100" />
+        </property>
+        <property name="emfantasia" type="string">
+            <column name="emfantasia" length="100" />
+        </property>
+        <property name="emcnpj" type="string">
+            <column name="emcnpj" length="14" not-null="true" />
+        </property>
+        <property name="emcep" type="string">
+            <column name="emcep" length="9" not-null="true" />
+        </property>
+        <property name="emuf" type="string">
+            <column name="emuf" length="2" />
+        </property>
+        <property name="embairro" type="string">
+            <column name="embairro" length="30" />
+        </property>
+        <property name="emcidade" type="string">
+            <column name="emcidade" length="50" />
+        </property>
+        <property name="emendereco" type="string">
+            <column name="emendereco" length="100" />
+        </property>
+        <property name="ememail" type="string">
+            <column name="ememail" length="50" />
+        </property>
+        <property name="emtelefone" type="string">
+            <column name="emtelefone" length="20" />
+        </property>
+        <property name="emdataatu" type="date">
+            <column name="emdataatu" length="13" />
+        </property>
+        <property name="emhoraatu" type="time">
+            <column name="emhoraatu" length="15" />
+        </property>
+        <set name="produtoses" table="produtos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="prempresa" not-null="true" />
+            </key>
+            <one-to-many class="classes.Produtos" />
+        </set>
+        <set name="gruposes" table="grupos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="grempresa" not-null="true" />
+            </key>
+            <one-to-many class="classes.Grupos" />
+        </set>
+        <set name="formaspgtos" table="formaspgto" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fpempresa" not-null="true" />
+            </key>
+            <one-to-many class="classes.Formaspgto" />
+        </set>
+        <set name="tabelaprecoses" table="tabelaprecos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tpempresa" not-null="true" />
+            </key>
+            <one-to-many class="classes.Tabelaprecos" />
+        </set>
+        <set name="clienteses" table="clientes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="clempresa" not-null="true" />
+            </key>
+            <one-to-many class="classes.Clientes" />
+        </set>
+        <set name="pedidoses" table="pedidos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="peempresa" not-null="true" />
+            </key>
+            <one-to-many class="classes.Pedidos" />
+        </set>
+        <set name="usuarios" table="usuario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usempresa" not-null="true" />
+            </key>
+            <one-to-many class="classes.Usuario" />
+        </set>
+    </class>
+</hibernate-mapping>

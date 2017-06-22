@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/06/2017 19:11:28 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="classes.Produtos" table="produtos" schema="public" optimistic-lock="version">
+        <composite-id name="id" class="classes.ProdutosId">
+            <key-property name="prempresa" type="int">
+                <column name="prempresa" />
+            </key-property>
+            <key-property name="prcodigo" type="int">
+                <column name="prcodigo" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="empresa" class="classes.Empresa" update="false" insert="false" fetch="select">
+            <column name="prempresa" not-null="true" />
+        </many-to-one>
+        <many-to-one name="grupos" class="classes.Grupos" update="false" insert="false" fetch="select">
+            <column name="prgrupo" not-null="true" />
+            <column name="prempresa" not-null="true" />
+        </many-to-one>
+        <property name="prnome" type="string">
+            <column name="prnome" length="100" />
+        </property>
+        <property name="prunidade" type="string">
+            <column name="prunidade" length="2" />
+        </property>
+        <property name="prinativo" type="string">
+            <column name="prinativo" length="1" />
+        </property>
+        <property name="prdataatu" type="date">
+            <column name="prdataatu" length="13" not-null="true" />
+        </property>
+        <property name="prhoraatu" type="time">
+            <column name="prhoraatu" length="15" not-null="true" />
+        </property>
+        <set name="tabelaprecosdetalheses" table="tabelaprecosdetalhes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tdproduto" not-null="true" />
+                <column name="tdempresa" not-null="true" />
+            </key>
+            <one-to-many class="classes.Tabelaprecosdetalhes" />
+        </set>
+    </class>
+</hibernate-mapping>

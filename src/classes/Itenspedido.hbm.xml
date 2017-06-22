@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/06/2017 19:11:28 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="classes.Itenspedido" table="itenspedido" schema="public" optimistic-lock="version">
+        <composite-id name="id" class="classes.ItenspedidoId">
+            <key-property name="ipemresa" type="int">
+                <column name="ipemresa" />
+            </key-property>
+            <key-property name="ipusuario" type="int">
+                <column name="ipusuario" />
+            </key-property>
+            <key-property name="ippedido" type="int">
+                <column name="ippedido" />
+            </key-property>
+            <key-property name="ipproduto" type="int">
+                <column name="ipproduto" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="pedidos" class="classes.Pedidos" update="false" insert="false" fetch="select">
+            <column name="ipusuario" not-null="true" />
+            <column name="ippedido" not-null="true" />
+            <column name="ipemresa" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tabelaprecosdetalhes" class="classes.Tabelaprecosdetalhes" update="false" insert="false" fetch="select">
+            <column name="iptabelapreco" not-null="true" />
+            <column name="ipproduto" not-null="true" />
+            <column name="ipemresa" not-null="true" />
+        </many-to-one>
+        <property name="ipquantidade" type="big_decimal">
+            <column name="ipquantidade" precision="15" not-null="true" />
+        </property>
+        <property name="ipvalorunit" type="big_decimal">
+            <column name="ipvalorunit" precision="15" not-null="true" />
+        </property>
+        <property name="ipvalortotal" type="big_decimal">
+            <column name="ipvalortotal" precision="15" not-null="true" />
+        </property>
+        <property name="ippercdesconto" type="big_decimal">
+            <column name="ippercdesconto" precision="15" />
+        </property>
+        <property name="ipdataatu" type="date">
+            <column name="ipdataatu" length="13" not-null="true" />
+        </property>
+        <property name="iphoraatu" type="time">
+            <column name="iphoraatu" length="15" not-null="true" />
+        </property>
+        <property name="ipobs" type="string">
+            <column name="ipobs" />
+        </property>
+    </class>
+</hibernate-mapping>
