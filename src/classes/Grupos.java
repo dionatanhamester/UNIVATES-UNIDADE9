@@ -1,20 +1,16 @@
 package classes;
-// Generated 18/06/2017 19:11:25 by Hibernate Tools 4.3.1
+// Generated 24/06/2017 11:39:22 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -34,7 +30,6 @@ public class Grupos  implements java.io.Serializable {
      private String grnome;
      private Date grdataatu;
      private Date grhoraatu;
-     private Set<Produtos> produtoses = new HashSet<Produtos>(0);
 
     public Grupos() {
     }
@@ -46,13 +41,12 @@ public class Grupos  implements java.io.Serializable {
         this.grdataatu = grdataatu;
         this.grhoraatu = grhoraatu;
     }
-    public Grupos(GruposId id, Empresa empresa, String grnome, Date grdataatu, Date grhoraatu, Set<Produtos> produtoses) {
+    public Grupos(GruposId id, Empresa empresa, String grnome, Date grdataatu, Date grhoraatu) {
        this.id = id;
        this.empresa = empresa;
        this.grnome = grnome;
        this.grdataatu = grdataatu;
        this.grhoraatu = grhoraatu;
-       this.produtoses = produtoses;
     }
    
      @EmbeddedId
@@ -107,15 +101,6 @@ public class Grupos  implements java.io.Serializable {
     
     public void setGrhoraatu(Date grhoraatu) {
         this.grhoraatu = grhoraatu;
-    }
-
-    @OneToMany(fetch=FetchType.LAZY, mappedBy="grupos")
-    public Set<Produtos> getProdutoses() {
-        return this.produtoses;
-    }
-    
-    public void setProdutoses(Set<Produtos> produtoses) {
-        this.produtoses = produtoses;
     }
 
 

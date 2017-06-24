@@ -1,5 +1,5 @@
 package classes;
-// Generated 18/06/2017 19:11:25 by Hibernate Tools 4.3.1
+// Generated 24/06/2017 11:39:22 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -44,7 +44,7 @@ public class Clientes  implements java.io.Serializable {
      private String clinativo;
      private Date cldataatu;
      private Date clhoraatu;
-     private Set<Pedidos> pedidoses = new HashSet<Pedidos>(0);
+     private Set pedidoses = new HashSet(0);
 
     public Clientes() {
     }
@@ -56,7 +56,7 @@ public class Clientes  implements java.io.Serializable {
         this.cldataatu = cldataatu;
         this.clhoraatu = clhoraatu;
     }
-    public Clientes(ClientesId id, Empresa empresa, String clmatricula, String clnome, String clendereco, String clcidade, String clbairro, String cluf, String clcep, String clfone, String clemail, String clcpf, String clcnpj, String clinativo, Date cldataatu, Date clhoraatu, Set<Pedidos> pedidoses) {
+    public Clientes(ClientesId id, Empresa empresa, String clmatricula, String clnome, String clendereco, String clcidade, String clbairro, String cluf, String clcep, String clfone, String clemail, String clcpf, String clcnpj, String clinativo, Date cldataatu, Date clhoraatu, Set pedidoses) {
        this.id = id;
        this.empresa = empresa;
        this.clmatricula = clmatricula;
@@ -241,11 +241,11 @@ public class Clientes  implements java.io.Serializable {
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="clientes")
-    public Set<Pedidos> getPedidoses() {
+    public Set getPedidoses() {
         return this.pedidoses;
     }
     
-    public void setPedidoses(Set<Pedidos> pedidoses) {
+    public void setPedidoses(Set pedidoses) {
         this.pedidoses = pedidoses;
     }
 

@@ -42,32 +42,7 @@ public class Main {
      /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-          
-           
-
-        //ClientesDAO clientesDAO = new ClientesDAO();
-       /* String sql = "select * from Clientes";
-        try {
-             Session sessao = HibernateUtil.getSessionFactory().openSession();
-             Query query = sessao.createQuery("FROM Clientes");
-            
-            List<Clientes> listClientes = query.list();
-                 
-            for (int i=0;i<listClientes.size();i++){
-                Clientes clie = listClientes.get(0);
-                
-                System.out.println(clie.getClnome());
-            }
-            System.out.println("FINALIZOU!");
-            
-            
-            //List<Clientes> listEmpresa = clientesDAO.getInstance().toListObject(query);
-        } catch (Exception ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-        
-           
+    public static void main(String[] args) {           
         EmpresaDAO empresaDAO = new EmpresaDAO();
                      
         try {            
@@ -94,53 +69,11 @@ public class Main {
             } else {    
                empresaSelecionada = listEmpresa.get(0);                        
             }
-            //formInicial frmInicial = new formInicial();
-            //frmInicial.setVisible(true);                    
+            formInicial frmInicial = new formInicial();
+            frmInicial.setVisible(true);                    
         } catch (Exception ex) {            
             System.out.println(ex.getMessage());
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }    
-        
-         ProdutosDAO produtosDAO = new ProdutosDAO();
-          
-           
-        //Produtos(ProdutosId id, Empresa empresa, Grupos grupos, Date prdataatu, Date prhoraatu) {
-        Session sessao = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = sessao.beginTransaction();        
-        
-        try{
-           
-            ProdutosId id = new ProdutosId(4, 10012);
-        
-        GruposDAO gruposDAO = new GruposDAO();
-        
-        String sql = "FROM Grupos";
-        List<Grupos> listGrupos = gruposDAO.consultaSQL(sql);
-        Grupos grupoSelecionado = listGrupos.get(0);
-        
-        Produtos prod = new Produtos();
-        prod.setId(id);
-        
-        prod.setGrupos(grupoSelecionado);
-        
-        prod.setPrdataatu(new Date());
-        prod.setPrhoraatu(new Date());
-        prod.setPrnome("BI");
-        prod.setPrunidade("SS");
-        
-        sessao.save(prod);
-        //produtosDAO.Insert(prod); 
-        
-            transaction.commit();
-        } catch (Exception ex){
-            
-            transaction.rollback();
-            
-        } finally {
-            if(sessao !=null && sessao.isOpen()) {
-                sessao.close();
-                sessao=null;
-            }
-        }
     }    
 }

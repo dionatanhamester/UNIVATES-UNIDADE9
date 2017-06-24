@@ -24,8 +24,9 @@ public class formPesquisa extends javax.swing.JInternalFrame {
     private static String vSQL = null;
     static int openFrameCount = 0;
     private JTextField edtReturn;
+    private Class classe;
     
-    public formPesquisa(JTextField jtf, Vector<String> cabecalho, Vector<String> campos, String SQL ){
+    public formPesquisa(JTextField jtf, String SQL, Class cl ){
       
         super("IFrame #" + (++openFrameCount),
              false, // resizable
@@ -33,12 +34,9 @@ public class formPesquisa extends javax.swing.JInternalFrame {
              false, // maximizable
              true);// iconifiable}
          
-        edtReturn     = jtf;
-        
-        camposPesq    = campos;
-        cabecalhoPesq = cabecalho;
-        vSQL = SQL;
-        
+        edtReturn = jtf;
+        vSQL      = SQL;
+        classe    = cl;
         initComponents();
     }
 
@@ -178,12 +176,11 @@ public class formPesquisa extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
   
     private void BotaoConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoConsultaActionPerformed
-        
+        Uses.popularTabela(gridPesquisar, vSQL, classe);
     }//GEN-LAST:event_BotaoConsultaActionPerformed
 
     private void gridPesquisarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gridPesquisarMouseClicked
-        if (evt.getClickCount() == 2)
-        {
+        if (evt.getClickCount() == 2){
             int row = gridPesquisar.getSelectedRow();
 
             if (row < 0)
@@ -200,7 +197,7 @@ public class formPesquisa extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_gridPesquisarMouseClicked
 
     private void BotaoConsulta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoConsulta1ActionPerformed
-        
+         Uses.popularTabela(gridPesquisar1, vSQL, classe);
     }//GEN-LAST:event_BotaoConsulta1ActionPerformed
 
     private void gridPesquisar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gridPesquisar1MouseClicked

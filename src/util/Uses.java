@@ -10,8 +10,12 @@ import controller.ClientesDAO;
 import classes.Clientes;
 import classes.Grupos;
 import classes.Produtos;
+import classes.Tabelaprecos;
+import classes.Tabelaprecosdetalhes;
 import controller.GruposDAO;
 import controller.ProdutosDAO;
+import controller.TabelaPrecosDAO;
+import controller.TabelaPrecosDetalhesDAO;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -86,8 +90,8 @@ public class Uses {
      * @param vCampos
      * @param SQL 
      */
-    public static void ChamaTelaPesquisa(JTextField edt, Vector<String> vCabecalho, Vector<String> vCampos, String SQL)    {
-        formPesquisa pesq = new formPesquisa(edt, vCabecalho, vCampos, SQL);
+    public static void ChamaTelaPesquisa(JTextField edt, String SQL, Class classe)    {
+        formPesquisa pesq = new formPesquisa(edt, SQL, classe);
         formInicial.jDesktopPane1.add(pesq);
         Uses.center(pesq);
         pesq.setVisible(true);
@@ -164,6 +168,49 @@ public class Uses {
                     Vector<Object> linha = new Vector<Object>();
                      linha.add(String.valueOf(listData.get(i).getId().getGrcodigo()));
                      linha.add(listData.get(i).getGrnome());                     
+                     
+                     dadosTabela.add(linha);
+                }                
+            } else if (tabela.equals(Tabelaprecos.class)){                        
+                cabecalho.setSize(2);
+                cabecalho.set(0, "Código");
+                cabecalho.set(1, "Nome");        
+                campos.setSize(2);
+                campos.set(0, "TPCODIGO");
+                campos.set(1, "TPNOME");
+                
+                TabelaPrecosDAO tabelaDAO = new TabelaPrecosDAO();                
+                List<Tabelaprecos> listData = tabelaDAO.consultaSQL(vSQL);
+                
+                for (int i = 0; i < listData.size(); i++){                    
+                    Vector<Object> linha = new Vector<Object>();
+                     linha.add(String.valueOf(listData.get(i).getId().getTpcodigo()));
+                     linha.add(listData.get(i).getTpnome());                     
+                     
+                     dadosTabela.add(linha);
+                }                
+            } else if (tabela.equals(Tabelaprecosdetalhes.class)){                        
+                cabecalho.setSize(2);
+                cabecalho.setSize(3);
+                cabecalho.set(0, "Código");
+                cabecalho.set(1, "Nome");
+                cabecalho.set(2, "Preço");       
+                campos.setSize(3);
+                campos.set(0, "TDPRODUTO");
+                campos.set(1, "PRNOME");
+                campos.set(2, "TDPRECO");
+                
+                TabelaPrecosDetalhesDAO tabeladetalhesDAO = new TabelaPrecosDetalhesDAO();                
+                List<Tabelaprecosdetalhes> listData = tabeladetalhesDAO.consultaSQL(vSQL);
+                
+                for (int i = 0; i < listData.size(); i++){                    
+                    Vector<Object> linha = new Vector<Object>();
+                    ProdutosDAO produtosDAO = new ProdutosDAO();
+                    
+                    Produtos prod = produtosDAO.getProduto(listData.get(i).getId().getTdempresa(), listData.get(i).getId().getTdproduto());
+                     linha.add(String.valueOf(prod.getId().getPrcodigo()));
+                     linha.add(prod.getPrnome());             
+                     linha.add(String.valueOf(listData.get(i).getTdpreco()));               
                      
                      dadosTabela.add(linha);
                 }                

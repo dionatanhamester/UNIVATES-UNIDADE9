@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 18/06/2017 19:11:28 by Hibernate Tools 4.3.1 -->
+<!-- Generated 24/06/2017 11:39:25 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="classes.Tabelaprecos" table="tabelaprecos" schema="public" optimistic-lock="version">
         <composite-id name="id" class="classes.TabelaprecosId">
@@ -30,12 +30,5 @@
         <property name="tphoraatu" type="time">
             <column name="tphoraatu" length="15" />
         </property>
-        <set name="tabelaprecosdetalheses" table="tabelaprecosdetalhes" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="tdempresa" not-null="true" />
-                <column name="tdtabelapreco" not-null="true" />
-            </key>
-            <one-to-many class="classes.Tabelaprecosdetalhes" />
-        </set>
     </class>
 </hibernate-mapping>

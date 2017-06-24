@@ -22,6 +22,7 @@ import java.util.Date;
 import org.hibernate.Session;
 import util.CaixaDeDialogo;
 import util.HibernateUtil;
+import util.JTextFieldLimit;
 import util.Uses;
 import static view.formInicial.jframe_inicial;
 
@@ -61,6 +62,9 @@ public class formProdutos extends javax.swing.JInternalFrame {
         carregaComboBoxGrupos();
         
         mensagem = CaixaDeDialogo.obterInstancia();
+        
+        Ed_Nome.setDocument(new JTextFieldLimit(100));
+        Ed_Unidade.setDocument(new JTextFieldLimit(2));
     }
 
     /**
@@ -412,16 +416,15 @@ public class formProdutos extends javax.swing.JInternalFrame {
         produto.setPrnome(Ed_Nome.getText().trim());                
         produto.setPrunidade(Ed_Unidade.getText().trim());
                 
-        //produto.setGrupos(); //gruposCadastrados.get(cbGrupos.getSelectedIndex())
-        //HibernateUtil.getSessionFactory().openSession().load(Grupos.class, gruposCadastrados.get(cbGrupos.getSelectedIndex()))
-       
-        System.out.print(produto.getGrupos().getGrnome());
+        produto.setPrgrupo(gruposCadastrados.get(cbGrupos.getSelectedIndex()).getId().getGrcodigo());
         
         if (Check_Inativo.isSelected()){
             produto.setPrinativo("S");
         } else {
             produto.setPrinativo("N");
         }
+        
+        
         
         produto.setPrdataatu(new Date());
         produto.setPrhoraatu(new Date());
@@ -453,7 +456,7 @@ public class formProdutos extends javax.swing.JInternalFrame {
         Ed_Unidade.setText(produto.getPrunidade());
         
         for (int i = 0; i < gruposCadastrados.size(); i++){
-            if (gruposCadastrados.get(i).getId().getGrcodigo() == produto.getGrupos().getId().getGrcodigo()){
+            if (gruposCadastrados.get(i).getId().getGrcodigo() == produto.getPrgrupo()){
                 cbGrupos.setSelectedIndex(i);
                 break;
             }

@@ -1,5 +1,5 @@
 package classes;
-// Generated 18/06/2017 19:11:25 by Hibernate Tools 4.3.1
+// Generated 24/06/2017 11:39:22 by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -50,7 +50,7 @@ public class Pedidos  implements java.io.Serializable {
      private Date pehoraatu;
      private Date pedata;
      private String pemotivocancelamento;
-     private Set<Itenspedido> itenspedidos = new HashSet<Itenspedido>(0);
+     private Set itenspedidos = new HashSet(0);
 
     public Pedidos() {
     }
@@ -65,7 +65,7 @@ public class Pedidos  implements java.io.Serializable {
         this.pedataatu = pedataatu;
         this.pehoraatu = pehoraatu;
     }
-    public Pedidos(PedidosId id, Clientes clientes, Empresa empresa, Formaspgto formaspgto, Usuario usuario, Integer peduracao, BigDecimal peproducaoleite, BigDecimal pepesovivo, Integer penrolactantes, Integer penropreparto, Integer penronovilhas, Integer penroterneiras2mes, Integer penroterneiras6mes, BigDecimal pevalortotal, String peobs, String pecancelado, Date pedataatu, Date pehoraatu, Date pedata, String pemotivocancelamento, Set<Itenspedido> itenspedidos) {
+    public Pedidos(PedidosId id, Clientes clientes, Empresa empresa, Formaspgto formaspgto, Usuario usuario, Integer peduracao, BigDecimal peproducaoleite, BigDecimal pepesovivo, Integer penrolactantes, Integer penropreparto, Integer penronovilhas, Integer penroterneiras2mes, Integer penroterneiras6mes, BigDecimal pevalortotal, String peobs, String pecancelado, Date pedataatu, Date pehoraatu, Date pedata, String pemotivocancelamento, Set itenspedidos) {
        this.id = id;
        this.clientes = clientes;
        this.empresa = empresa;
@@ -301,11 +301,11 @@ public class Pedidos  implements java.io.Serializable {
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="pedidos")
-    public Set<Itenspedido> getItenspedidos() {
+    public Set getItenspedidos() {
         return this.itenspedidos;
     }
     
-    public void setItenspedidos(Set<Itenspedido> itenspedidos) {
+    public void setItenspedidos(Set itenspedidos) {
         this.itenspedidos = itenspedidos;
     }
 

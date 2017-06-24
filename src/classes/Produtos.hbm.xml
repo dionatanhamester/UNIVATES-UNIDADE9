@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 18/06/2017 19:11:28 by Hibernate Tools 4.3.1 -->
+<!-- Generated 24/06/2017 11:39:25 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="classes.Produtos" table="produtos" schema="public" optimistic-lock="version">
         <composite-id name="id" class="classes.ProdutosId">
@@ -15,12 +15,11 @@
         <many-to-one name="empresa" class="classes.Empresa" update="false" insert="false" fetch="select">
             <column name="prempresa" not-null="true" />
         </many-to-one>
-        <many-to-one name="grupos" class="classes.Grupos" update="false" insert="false" fetch="select">
-            <column name="prgrupo" not-null="true" />
-            <column name="prempresa" not-null="true" />
-        </many-to-one>
         <property name="prnome" type="string">
             <column name="prnome" length="100" />
+        </property>
+        <property name="prgrupo" type="java.lang.Integer">
+            <column name="prgrupo" />
         </property>
         <property name="prunidade" type="string">
             <column name="prunidade" length="2" />
@@ -34,12 +33,5 @@
         <property name="prhoraatu" type="time">
             <column name="prhoraatu" length="15" not-null="true" />
         </property>
-        <set name="tabelaprecosdetalheses" table="tabelaprecosdetalhes" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="tdproduto" not-null="true" />
-                <column name="tdempresa" not-null="true" />
-            </key>
-            <one-to-many class="classes.Tabelaprecosdetalhes" />
-        </set>
     </class>
 </hibernate-mapping>

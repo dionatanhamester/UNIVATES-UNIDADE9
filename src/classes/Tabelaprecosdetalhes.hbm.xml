@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 18/06/2017 19:11:28 by Hibernate Tools 4.3.1 -->
+<!-- Generated 24/06/2017 11:39:25 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="classes.Tabelaprecosdetalhes" table="tabelaprecosdetalhes" schema="public" optimistic-lock="version">
         <composite-id name="id" class="classes.TabelaprecosdetalhesId">
@@ -15,14 +15,6 @@
                 <column name="tdproduto" />
             </key-property>
         </composite-id>
-        <many-to-one name="produtos" class="classes.Produtos" update="false" insert="false" fetch="select">
-            <column name="tdproduto" not-null="true" />
-            <column name="tdempresa" not-null="true" />
-        </many-to-one>
-        <many-to-one name="tabelaprecos" class="classes.Tabelaprecos" update="false" insert="false" fetch="select">
-            <column name="tdempresa" not-null="true" />
-            <column name="tdtabelapreco" not-null="true" />
-        </many-to-one>
         <property name="tdpreco" type="big_decimal">
             <column name="tdpreco" precision="15" not-null="true" />
         </property>

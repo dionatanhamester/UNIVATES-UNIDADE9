@@ -1,5 +1,5 @@
 package classes;
-// Generated 18/06/2017 19:11:25 by Hibernate Tools 4.3.1
+// Generated 24/06/2017 11:39:22 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -39,7 +39,7 @@ public class Usuario  implements java.io.Serializable {
      private String ustelefone;
      private String ussenhamd5;
      private String ustipoacesso;
-     private Set<Pedidos> pedidoses = new HashSet<Pedidos>(0);
+     private Set pedidoses = new HashSet(0);
 
     public Usuario() {
     }
@@ -51,7 +51,7 @@ public class Usuario  implements java.io.Serializable {
         this.usendereco = usendereco;
         this.usemail = usemail;
     }
-    public Usuario(UsuarioId id, Empresa empresa, String usnome, String uscpf, String uscnpj, String uscep, String usuf, String usbairro, String uscidade, String usendereco, String usemail, String ustelefone, String ussenhamd5, String ustipoacesso, Set<Pedidos> pedidoses) {
+    public Usuario(UsuarioId id, Empresa empresa, String usnome, String uscpf, String uscnpj, String uscep, String usuf, String usbairro, String uscidade, String usendereco, String usemail, String ustelefone, String ussenhamd5, String ustipoacesso, Set pedidoses) {
        this.id = id;
        this.empresa = empresa;
        this.usnome = usnome;
@@ -214,11 +214,11 @@ public class Usuario  implements java.io.Serializable {
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="usuario")
-    public Set<Pedidos> getPedidoses() {
+    public Set getPedidoses() {
         return this.pedidoses;
     }
     
-    public void setPedidoses(Set<Pedidos> pedidoses) {
+    public void setPedidoses(Set pedidoses) {
         this.pedidoses = pedidoses;
     }
 

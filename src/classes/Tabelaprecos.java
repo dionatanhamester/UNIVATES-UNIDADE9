@@ -1,10 +1,8 @@
 package classes;
-// Generated 18/06/2017 19:11:25 by Hibernate Tools 4.3.1
+// Generated 24/06/2017 11:39:22 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
@@ -13,7 +11,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -35,7 +32,6 @@ public class Tabelaprecos  implements java.io.Serializable {
      private Date tpdatatabela;
      private Date tpdataatu;
      private Date tphoraatu;
-     private Set<Tabelaprecosdetalhes> tabelaprecosdetalheses = new HashSet<Tabelaprecosdetalhes>(0);
 
     public Tabelaprecos() {
     }
@@ -45,7 +41,7 @@ public class Tabelaprecos  implements java.io.Serializable {
         this.id = id;
         this.empresa = empresa;
     }
-    public Tabelaprecos(TabelaprecosId id, Empresa empresa, String tpnome, String tpobs, Date tpdatatabela, Date tpdataatu, Date tphoraatu, Set<Tabelaprecosdetalhes> tabelaprecosdetalheses) {
+    public Tabelaprecos(TabelaprecosId id, Empresa empresa, String tpnome, String tpobs, Date tpdatatabela, Date tpdataatu, Date tphoraatu) {
        this.id = id;
        this.empresa = empresa;
        this.tpnome = tpnome;
@@ -53,7 +49,6 @@ public class Tabelaprecos  implements java.io.Serializable {
        this.tpdatatabela = tpdatatabela;
        this.tpdataatu = tpdataatu;
        this.tphoraatu = tphoraatu;
-       this.tabelaprecosdetalheses = tabelaprecosdetalheses;
     }
    
      @EmbeddedId
@@ -128,15 +123,6 @@ public class Tabelaprecos  implements java.io.Serializable {
     
     public void setTphoraatu(Date tphoraatu) {
         this.tphoraatu = tphoraatu;
-    }
-
-@OneToMany(fetch=FetchType.LAZY, mappedBy="tabelaprecos")
-    public Set<Tabelaprecosdetalhes> getTabelaprecosdetalheses() {
-        return this.tabelaprecosdetalheses;
-    }
-    
-    public void setTabelaprecosdetalheses(Set<Tabelaprecosdetalhes> tabelaprecosdetalheses) {
-        this.tabelaprecosdetalheses = tabelaprecosdetalheses;
     }
 
 

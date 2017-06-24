@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24/06/2017 11:39:25 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="classes.Pedidos" table="pedidos" schema="public" optimistic-lock="version">
+        <composite-id name="id" class="classes.PedidosId">
+            <key-property name="peusuario" type="int">
+                <column name="peusuario" />
+            </key-property>
+            <key-property name="peempresa" type="int">
+                <column name="peempresa" />
+            </key-property>
+            <key-property name="pepedido" type="int">
+                <column name="pepedido" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="clientes" class="classes.Clientes" update="false" insert="false" fetch="select">
+            <column name="pecliente" not-null="true" />
+            <column name="peempresa" not-null="true" />
+        </many-to-one>
+        <many-to-one name="empresa" class="classes.Empresa" update="false" insert="false" fetch="select">
+            <column name="peempresa" not-null="true" />
+        </many-to-one>
+        <many-to-one name="formaspgto" class="classes.Formaspgto" update="false" insert="false" fetch="select">
+            <column name="peformapgto" not-null="true" />
+            <column name="peempresa" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuario" class="classes.Usuario" update="false" insert="false" fetch="select">
+            <column name="peusuario" not-null="true" />
+            <column name="peempresa" not-null="true" />
+        </many-to-one>
+        <property name="peduracao" type="java.lang.Integer">
+            <column name="peduracao" />
+        </property>
+        <property name="peproducaoleite" type="big_decimal">
+            <column name="peproducaoleite" precision="15" />
+        </property>
+        <property name="pepesovivo" type="big_decimal">
+            <column name="pepesovivo" precision="15" />
+        </property>
+        <property name="penrolactantes" type="java.lang.Integer">
+            <column name="penrolactantes" />
+        </property>
+        <property name="penropreparto" type="java.lang.Integer">
+            <column name="penropreparto" />
+        </property>
+        <property name="penronovilhas" type="java.lang.Integer">
+            <column name="penronovilhas" />
+        </property>
+        <property name="penroterneiras2mes" type="java.lang.Integer">
+            <column name="penroterneiras2mes" />
+        </property>
+        <property name="penroterneiras6mes" type="java.lang.Integer">
+            <column name="penroterneiras6mes" />
+        </property>
+        <property name="pevalortotal" type="big_decimal">
+            <column name="pevalortotal" precision="15" />
+        </property>
+        <property name="peobs" type="string">
+            <column name="peobs" />
+        </property>
+        <property name="pecancelado" type="string">
+            <column name="pecancelado" length="1" />
+        </property>
+        <property name="pedataatu" type="date">
+            <column name="pedataatu" length="13" not-null="true" />
+        </property>
+        <property name="pehoraatu" type="time">
+            <column name="pehoraatu" length="15" not-null="true" />
+        </property>
+        <property name="pedata" type="date">
+            <column name="pedata" length="13" />
+        </property>
+        <property name="pemotivocancelamento" type="string">
+            <column name="pemotivocancelamento" />
+        </property>
+        <set name="itenspedidos" table="itenspedido" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ipusuario" not-null="true" />
+                <column name="ippedido" not-null="true" />
+                <column name="ipemresa" not-null="true" />
+            </key>
+            <one-to-many class="classes.Itenspedido" />
+        </set>
+    </class>
+</hibernate-mapping>

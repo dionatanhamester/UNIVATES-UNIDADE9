@@ -1213,7 +1213,7 @@ public class formVendas extends javax.swing.JInternalFrame {
         campos.set(0, "CL_CODIGO");
         campos.set(1, "CL_NOME");
 
-        Uses.ChamaTelaPesquisa(Ed_Cliente, cabecalho, campos, vSQL);              
+      //  Uses.ChamaTelaPesquisa(Ed_Cliente, cabecalho, campos, vSQL);              
     }//GEN-LAST:event_F3_ClienteActionPerformed
 
     private void Ed_PrePartoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Ed_PrePartoFocusLost
@@ -1250,7 +1250,7 @@ public class formVendas extends javax.swing.JInternalFrame {
         campos.set(0, "FP_CODIGO");
         campos.set(1, "FP_DESCRICAO");
 
-        Uses.ChamaTelaPesquisa(Ed_FormasPgto,cabecalho, campos, vSQL); 
+    //    Uses.ChamaTelaPesquisa(Ed_FormasPgto,cabecalho, campos, vSQL); 
     }//GEN-LAST:event_F3_FormaPgtoActionPerformed
 
     private void gridDetalhesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gridDetalhesMouseClicked

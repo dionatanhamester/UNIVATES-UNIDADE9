@@ -19,6 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.hibernate.Query;
 import util.CaixaDeDialogo;
+import util.JTextFieldLimit;
 import util.Uses;
 import static view.formInicial.jframe_inicial;
 
@@ -52,7 +53,18 @@ public class formClientes extends javax.swing.JInternalFrame {
         carregaConfConsulta();     
         
         mensagem = CaixaDeDialogo.obterInstancia();
-
+        
+        Ed_Matricula.setDocument(new JTextFieldLimit(20));
+        Ed_Nome.setDocument(new JTextFieldLimit(80));
+        Ed_Endereco.setDocument(new JTextFieldLimit(100));
+        Ed_Cidade.setDocument(new JTextFieldLimit(50));
+        Ed_Bairro.setDocument(new JTextFieldLimit(30));
+        Ed_UF.setDocument(new JTextFieldLimit(2));
+        Ed_Cep.setDocument(new JTextFieldLimit(9));
+        Ed_Fone.setDocument(new JTextFieldLimit(30));
+        Ed_Email.setDocument(new JTextFieldLimit(100));
+        Ed_CPF.setDocument(new JTextFieldLimit(11));
+        Ed_CNPJ.setDocument(new JTextFieldLimit(14));                       
     }
     
     /**

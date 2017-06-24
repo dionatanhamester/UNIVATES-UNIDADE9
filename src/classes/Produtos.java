@@ -1,21 +1,16 @@
 package classes;
-// Generated 18/06/2017 19:11:25 by Hibernate Tools 4.3.1
+// Generated 24/06/2017 11:39:22 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -29,36 +24,35 @@ import javax.persistence.TemporalType;
 )
 public class Produtos  implements java.io.Serializable {
 
+
      private ProdutosId id;
      private Empresa empresa;
-     private Grupos grupos;
      private String prnome;
+     private Integer prgrupo;
      private String prunidade;
      private String prinativo;
      private Date prdataatu;
      private Date prhoraatu;
-     private Set<Tabelaprecosdetalhes> tabelaprecosdetalheses = new HashSet<Tabelaprecosdetalhes>(0);
-     
+
     public Produtos() {
     }
+
 	
-    public Produtos(ProdutosId id, Empresa empresa, Grupos grupos, Date prdataatu, Date prhoraatu) {
+    public Produtos(ProdutosId id, Empresa empresa, Date prdataatu, Date prhoraatu) {
         this.id = id;
         this.empresa = empresa;
-        this.grupos = grupos;
         this.prdataatu = prdataatu;
         this.prhoraatu = prhoraatu;
     }
-    public Produtos(ProdutosId id, Empresa empresa, Grupos grupos, String prnome, String prunidade, String prinativo, Date prdataatu, Date prhoraatu, Set<Tabelaprecosdetalhes> tabelaprecosdetalheses) {
+    public Produtos(ProdutosId id, Empresa empresa, String prnome, Integer prgrupo, String prunidade, String prinativo, Date prdataatu, Date prhoraatu) {
        this.id = id;
        this.empresa = empresa;
-       this.grupos = grupos;
        this.prnome = prnome;
+       this.prgrupo = prgrupo;
        this.prunidade = prunidade;
        this.prinativo = prinativo;
        this.prdataatu = prdataatu;
        this.prhoraatu = prhoraatu;
-       this.tabelaprecosdetalheses = tabelaprecosdetalheses;
     }
    
      @EmbeddedId
@@ -85,18 +79,6 @@ public class Produtos  implements java.io.Serializable {
         this.empresa = empresa;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumns( { 
-        @JoinColumn(name="prgrupo", referencedColumnName="grempresa", nullable=false, insertable=false, updatable=false), 
-        @JoinColumn(name="prempresa", referencedColumnName="grcodigo", nullable=false, insertable=false, updatable=false) } )
-    public Grupos getGrupos() {
-        return this.grupos;
-    }
-    
-    public void setGrupos(Grupos grupos) {
-        this.grupos = grupos;
-    }
-
     
     @Column(name="prnome", length=100)
     public String getPrnome() {
@@ -105,6 +87,16 @@ public class Produtos  implements java.io.Serializable {
     
     public void setPrnome(String prnome) {
         this.prnome = prnome;
+    }
+
+    
+    @Column(name="prgrupo")
+    public Integer getPrgrupo() {
+        return this.prgrupo;
+    }
+    
+    public void setPrgrupo(Integer prgrupo) {
+        this.prgrupo = prgrupo;
     }
 
     
@@ -145,19 +137,6 @@ public class Produtos  implements java.io.Serializable {
     
     public void setPrhoraatu(Date prhoraatu) {
         this.prhoraatu = prhoraatu;
-    }
-
-@OneToMany(fetch=FetchType.LAZY, mappedBy="produtos")
-    public Set<Tabelaprecosdetalhes> getTabelaprecosdetalheses() {
-        return this.tabelaprecosdetalheses;
-    }
-    
-    public void setTabelaprecosdetalheses(Set<Tabelaprecosdetalhes> tabelaprecosdetalheses) {
-        this.tabelaprecosdetalheses = tabelaprecosdetalheses;
-    }
-
-    public void setGrupos(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 

@@ -1,5 +1,5 @@
 package classes;
-// Generated 18/06/2017 19:11:25 by Hibernate Tools 4.3.1
+// Generated 24/06/2017 11:39:22 by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -11,9 +11,6 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -28,25 +25,19 @@ public class Tabelaprecosdetalhes  implements java.io.Serializable {
 
 
      private TabelaprecosdetalhesId id;
-     private Produtos produtos;
-     private Tabelaprecos tabelaprecos;
      private BigDecimal tdpreco;
-     private Set<Itenspedido> itenspedidos = new HashSet<Itenspedido>(0);
+     private Set itenspedidos = new HashSet(0);
 
     public Tabelaprecosdetalhes() {
     }
 
 	
-    public Tabelaprecosdetalhes(TabelaprecosdetalhesId id, Produtos produtos, Tabelaprecos tabelaprecos, BigDecimal tdpreco) {
+    public Tabelaprecosdetalhes(TabelaprecosdetalhesId id, BigDecimal tdpreco) {
         this.id = id;
-        this.produtos = produtos;
-        this.tabelaprecos = tabelaprecos;
         this.tdpreco = tdpreco;
     }
-    public Tabelaprecosdetalhes(TabelaprecosdetalhesId id, Produtos produtos, Tabelaprecos tabelaprecos, BigDecimal tdpreco, Set<Itenspedido> itenspedidos) {
+    public Tabelaprecosdetalhes(TabelaprecosdetalhesId id, BigDecimal tdpreco, Set itenspedidos) {
        this.id = id;
-       this.produtos = produtos;
-       this.tabelaprecos = tabelaprecos;
        this.tdpreco = tdpreco;
        this.itenspedidos = itenspedidos;
     }
@@ -66,30 +57,6 @@ public class Tabelaprecosdetalhes  implements java.io.Serializable {
         this.id = id;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumns( { 
-        @JoinColumn(name="tdproduto", referencedColumnName="prempresa", nullable=false, insertable=false, updatable=false), 
-        @JoinColumn(name="tdempresa", referencedColumnName="prcodigo", nullable=false, insertable=false, updatable=false) } )
-    public Produtos getProdutos() {
-        return this.produtos;
-    }
-    
-    public void setProdutos(Produtos produtos) {
-        this.produtos = produtos;
-    }
-
-@ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumns( { 
-        @JoinColumn(name="tdempresa", referencedColumnName="tpempresa", nullable=false, insertable=false, updatable=false), 
-        @JoinColumn(name="tdtabelapreco", referencedColumnName="tpcodigo", nullable=false, insertable=false, updatable=false) } )
-    public Tabelaprecos getTabelaprecos() {
-        return this.tabelaprecos;
-    }
-    
-    public void setTabelaprecos(Tabelaprecos tabelaprecos) {
-        this.tabelaprecos = tabelaprecos;
-    }
-
     
     @Column(name="tdpreco", nullable=false, precision=15)
     public BigDecimal getTdpreco() {
@@ -101,11 +68,11 @@ public class Tabelaprecosdetalhes  implements java.io.Serializable {
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="tabelaprecosdetalhes")
-    public Set<Itenspedido> getItenspedidos() {
+    public Set getItenspedidos() {
         return this.itenspedidos;
     }
     
-    public void setItenspedidos(Set<Itenspedido> itenspedidos) {
+    public void setItenspedidos(Set itenspedidos) {
         this.itenspedidos = itenspedidos;
     }
 

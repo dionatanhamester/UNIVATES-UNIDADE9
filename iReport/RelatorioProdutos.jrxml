@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioProdutos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9bda7cce-da02-4533-a09a-7a552dd00540">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="dataset1" uuid="b7a94cc9-714c-4ebb-b077-fc489e2015fb"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\Dionatan\\Desktop\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select *
+from empresa em, grupos gr, produtos pr
+where
+   em.em_codigoweb = gr.gr_empresa and
+   em.em_codigoweb = pr.pr_empresa and
+   pr.pr_grupo = gr.gr_codigo]]>
+	</queryString>
+	<field name="em_codigoweb" class="java.lang.Integer"/>
+	<field name="em_razaosocial" class="java.lang.String"/>
+	<field name="em_fantasia" class="java.lang.String"/>
+	<field name="em_cnpj" class="java.lang.String"/>
+	<field name="em_cep" class="java.lang.String"/>
+	<field name="em_uf" class="java.lang.String"/>
+	<field name="em_bairro" class="java.lang.String"/>
+	<field name="em_cidade" class="java.lang.String"/>
+	<field name="em_endereco" class="java.lang.String"/>
+	<field name="em_email" class="java.lang.String"/>
+	<field name="em_telefone" class="java.lang.String"/>
+	<field name="em_data_atu" class="java.sql.Date"/>
+	<field name="em_hora_atu" class="java.sql.Time"/>
+	<field name="gr_empresa" class="java.lang.Integer"/>
+	<field name="gr_codigo" class="java.lang.Integer"/>
+	<field name="gr_nome" class="java.lang.String"/>
+	<field name="gr_data_atu" class="java.sql.Date"/>
+	<field name="gr_hora_atu" class="java.sql.Time"/>
+	<field name="pr_empresa" class="java.lang.Integer"/>
+	<field name="pr_codigo" class="java.lang.Integer"/>
+	<field name="pr_nome" class="java.lang.String"/>
+	<field name="pr_grupo" class="java.lang.Integer"/>
+	<field name="pr_unidade" class="java.lang.String"/>
+	<field name="pr_inativo" class="java.lang.String"/>
+	<field name="pr_data_atu" class="java.sql.Date"/>
+	<field name="pr_hora_atu" class="java.sql.Time"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="104" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="104" uuid="66b0464b-2873-4ed0-bc29-158e2f5cefdc"/>
+			</rectangle>
+			<image>
+				<reportElement x="3" y="1" width="113" height="90" uuid="afd682d5-e312-426c-9388-1d2db96c7713"/>
+				<imageExpression><![CDATA["univates.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="122" y="49" width="49" height="20" uuid="2a1eee91-b993-4c31-bd79-a4cfb36ad19a"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cidade:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="171" y="28" width="351" height="20" uuid="57fc23ee-f946-4da8-97d2-5af59a853e88"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{em_fantasia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="171" y="8" width="351" height="20" uuid="3306928a-c308-4481-9da3-5df5cb71d045"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{em_razaosocial}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="425" y="48" width="100" height="20" uuid="5e1589c9-03c4-449b-a117-373c7c1b8231"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{em_uf}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="171" y="48" width="230" height="20" uuid="a44a3cfc-0eab-455e-b7e3-73288e58e3ed"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{em_cidade}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="171" y="68" width="230" height="20" uuid="acd8dcc2-0522-410e-aaf0-8254deccba80"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{em_cnpj}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="401" y="49" width="24" height="20" uuid="9cfb0870-e938-4640-9b51-7414c9313877"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[UF:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="122" y="69" width="49" height="20" uuid="7f01bac5-5495-4efe-8564-ba5dac5ebdad"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CNPJ:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="122" y="29" width="49" height="20" uuid="8bdc1bf2-0fec-4e68-808f-ac443450c2c0"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fantasia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="122" y="9" width="49" height="20" uuid="39fb3370-d979-4c2f-8f75-d6f7c3bea064"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Empresa:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="205" y="84" width="166" height="20" uuid="9cada930-567c-46c9-b65f-4d6e4c9a7de8"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatório de Produtos]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement x="325" y="3" width="100" height="20" uuid="cbe680a3-7e75-41b7-8bfd-d999528f4741"/>
+				<text><![CDATA[Unidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="75" y="3" width="250" height="20" uuid="68c89881-6562-48d5-96a3-736f6f3b0d47"/>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="3" width="54" height="20" uuid="ab7768c2-456b-4704-8300-812b31f12db0"/>
+				<text><![CDATA[Código]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="425" y="3" width="82" height="20" uuid="0f018a55-5e5c-481a-b2e9-2ea792c54796"/>
+				<text><![CDATA[Grupo]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<elementGroup/>
+			<textField>
+				<reportElement x="3" y="0" width="72" height="20" uuid="697eb2f4-cefb-4852-8070-95ec1150f2af"/>
+				<textFieldExpression><![CDATA[$F{pr_codigo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="75" y="0" width="250" height="20" uuid="4b5e41e4-32b1-4f8e-8d6b-6e28b14a4a05"/>
+				<textFieldExpression><![CDATA[$F{pr_nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="325" y="0" width="100" height="20" uuid="ab273f19-38d4-4ecd-a0fe-5fd145f7c9f9"/>
+				<textFieldExpression><![CDATA[$F{pr_unidade}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="425" y="0" width="100" height="20" uuid="8e1a25f8-3e85-4ac6-adf3-aee3f91918b8"/>
+				<textFieldExpression><![CDATA[$F{gr_nome}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="42" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="20" uuid="2688999e-b8ce-4d88-b64d-ca92c0ae4778"/>
+			</rectangle>
+			<textField pattern="EEE, d MMM yyyy HH:mm:ss">
+				<reportElement x="0" y="0" width="290" height="20" uuid="a82685a1-46ea-4354-804c-33c4d89c8965"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="322" y="22" width="233" height="20" uuid="c0340518-be76-412a-bd6e-46ca6cb7785e"/>
+				<text><![CDATA[Desenvolvido por Dionatan Henrique Hamester]]></text>
+			</staticText>
+			<textField evaluationTime="Report">
+				<reportElement x="512" y="0" width="39" height="20" uuid="3b3fe81e-357c-4ee6-9166-4915c547e000"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="0" width="72" height="20" uuid="f9a4cffe-0a74-492f-b965-7daca90129a7"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

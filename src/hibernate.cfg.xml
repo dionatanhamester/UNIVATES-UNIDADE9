@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <!--
 DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
 
@@ -39,17 +39,24 @@ made subject to such option by the copyright holder.
 
 Contributor(s):
 -->
-<hibernate-reverse-engineering>
-  <schema-selection match-catalog="dbvendas"/>
-  <table-filter match-name="produtos"/>
-  <table-filter match-name="itenspedido"/>
-  <table-filter match-name="clientes"/>
-  <table-filter match-name="usuario"/>
-  <table-filter match-name="formaspgto"/>
-  <table-filter match-name="grupos"/>
-  <table-filter match-name="tabelaprecos"/>
-  <table-filter match-name="pedidos"/>
-  <table-filter match-name="tabelaprecosdetalhes"/>
-  <table-filter match-name="empresa"/>
-  <table-filter match-name="sequences"/>
-</hibernate-reverse-engineering>
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+    <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+    <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/dbvendas</property>
+    <property name="hibernate.connection.username">postgres</property>
+    <property name="hibernate.connection.password">postgres</property>
+    <property name="hibernate.current_session_context_class">thread</property>
+    <mapping resource="classes/Grupos.hbm.xml"/>
+    <mapping resource="classes/Pedidos.hbm.xml"/>
+    <mapping resource="classes/Produtos.hbm.xml"/>
+    <mapping resource="classes/Tabelaprecosdetalhes.hbm.xml"/>
+    <mapping resource="classes/Sequences.hbm.xml"/>
+    <mapping resource="classes/Formaspgto.hbm.xml"/>
+    <mapping resource="classes/Clientes.hbm.xml"/>
+    <mapping resource="classes/Itenspedido.hbm.xml"/>
+    <mapping resource="classes/Empresa.hbm.xml"/>
+    <mapping resource="classes/Usuario.hbm.xml"/>
+    <mapping resource="classes/Tabelaprecos.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

@@ -6,6 +6,7 @@
 package controller;
 
 import classes.Produtos;
+import java.util.List;
 
 /**
  *
@@ -19,4 +20,15 @@ public class ProdutosDAO extends CustomDAO<Produtos>{
         return sequences.getID(Produtos.class);
     }
     
+    public Produtos getProduto(Integer empresa, Integer produto){
+        String vSQL = "FROM Produtos where prempresa = "+String.valueOf(empresa) + " and prcodigo = "+String.valueOf(produto);
+        ProdutosDAO produtosDAO = new ProdutosDAO();                
+        List<Produtos> listData = produtosDAO.consultaSQL(vSQL);
+        
+        if (listData.size() > 0){
+            return listData.get(0);
+        } else {
+            return null;
+        }
+    }    
 }

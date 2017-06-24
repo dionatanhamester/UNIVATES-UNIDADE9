@@ -5,8 +5,23 @@
  */
 package view;
 
+import classes.Clientes;
+import controller.ClientesDAO;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.view.JasperViewer;
+import reportclasses.RelClientes;
 import util.CaixaDeDialogo;
 import util.Uses;
+
+
 
 /**
  *
@@ -95,7 +110,46 @@ public class formRelClientes extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGeraRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGeraRelatorioActionPerformed
-
+                
+        /*
+        
+        resultClientes = clientesDAO.getInstance().consultaSQL(sql);
+        
+        JRResultSetDataSource relatResult = new JRResultSetDataSource(resultClientes);*/
+        
+        String vSQL = "FROM Clientes where clcodigo is not null ";
+        ClientesDAO clientesDAO = new ClientesDAO();
+        List<Clientes> listClientes = clientesDAO.consultaSQL(vSQL);
+        
+        
+        List<RelClientes> listRel = new ArrayList<RelClientes>();
+        
+        RelClientes rel = new RelClientes();
+        rel.setEmrazaosocial("setEmrazaosocial");
+        rel.setEmfantasia("setEmfantasia");
+        rel.setEmcidade("setEmcidade");
+        rel.setEmcnpj("setEmcnpj");
+        rel.setEmuf("setEmuf");
+        rel.setClmatricula("setClmatricula");
+        rel.setClnome("setClnome");
+        rel.setClcidade("setClcidade");
+        rel.setCluf("setCluf");
+        rel.setClfone("setClfone");
+        rel.setClemail("setClemail");
+        
+        listRel.add(rel);
+        listRel.add(rel);
+        listRel.add(rel);
+        
+        JasperPrint jpPrint = null;
+        try {
+            jpPrint = JasperFillManager.fillReport("iReport/RelatorioClientes.jasper", new HashMap(), new JRBeanCollectionDataSource(listRel));
+            JasperViewer jpViewer = new JasperViewer(jpPrint , false); //false - não encerra a aplicação ao fechar a janela
+            jpViewer.setVisible(true);
+            jpViewer.toFront(); //apresenta o relatório acima das outras janelas
+        } catch (JRException ex) {
+            Logger.getLogger(formRelClientes.class.getName()).log(Level.SEVERE, null, ex);
+        }        
     }//GEN-LAST:event_btnGeraRelatorioActionPerformed
 
 

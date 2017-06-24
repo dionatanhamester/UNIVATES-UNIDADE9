@@ -116,6 +116,7 @@ public abstract class CustomDAO<T> {
         try{                      
            sessao = HibernateUtil.getSessionFactory().openSession();
            query = sessao.createQuery(sql);     
+            
            returnList = query.list();
           // transaction.commit();
         }catch (HibernateException e) {                 

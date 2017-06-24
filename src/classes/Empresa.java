@@ -1,5 +1,5 @@
 package classes;
-// Generated 18/06/2017 19:11:25 by Hibernate Tools 4.3.1
+// Generated 24/06/2017 11:39:22 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -37,13 +37,13 @@ public class Empresa  implements java.io.Serializable {
      private String emtelefone;
      private Date emdataatu;
      private Date emhoraatu;
-     private Set<Produtos> produtoses = new HashSet<Produtos>(0);
-     private Set<Grupos> gruposes = new HashSet<Grupos>(0);
-     private Set<Formaspgto> formaspgtos = new HashSet<Formaspgto>(0);
-     private Set<Tabelaprecos> tabelaprecoses = new HashSet<Tabelaprecos>(0);
-     private Set<Clientes> clienteses = new HashSet<Clientes>(0);
-     private Set<Pedidos> pedidoses = new HashSet<Pedidos>(0);
-     private Set<Usuario> usuarios = new HashSet<Usuario>(0);
+     private Set produtoses = new HashSet(0);
+     private Set gruposes = new HashSet(0);
+     private Set formaspgtos = new HashSet(0);
+     private Set tabelaprecoses = new HashSet(0);
+     private Set clienteses = new HashSet(0);
+     private Set pedidoses = new HashSet(0);
+     private Set usuarios = new HashSet(0);
 
     public Empresa() {
     }
@@ -54,7 +54,7 @@ public class Empresa  implements java.io.Serializable {
         this.emcnpj = emcnpj;
         this.emcep = emcep;
     }
-    public Empresa(int emcodigo, String emrazaosocial, String emfantasia, String emcnpj, String emcep, String emuf, String embairro, String emcidade, String emendereco, String ememail, String emtelefone, Date emdataatu, Date emhoraatu, Set<Produtos> produtoses, Set<Grupos> gruposes, Set<Formaspgto> formaspgtos, Set<Tabelaprecos> tabelaprecoses, Set<Clientes> clienteses, Set<Pedidos> pedidoses, Set<Usuario> usuarios) {
+    public Empresa(int emcodigo, String emrazaosocial, String emfantasia, String emcnpj, String emcep, String emuf, String embairro, String emcidade, String emendereco, String ememail, String emtelefone, Date emdataatu, Date emhoraatu, Set produtoses, Set gruposes, Set formaspgtos, Set tabelaprecoses, Set clienteses, Set pedidoses, Set usuarios) {
        this.emcodigo = emcodigo;
        this.emrazaosocial = emrazaosocial;
        this.emfantasia = emfantasia;
@@ -210,65 +210,65 @@ public class Empresa  implements java.io.Serializable {
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="empresa")
-    public Set<Produtos> getProdutoses() {
+    public Set getProdutoses() {
         return this.produtoses;
     }
     
-    public void setProdutoses(Set<Produtos> produtoses) {
+    public void setProdutoses(Set produtoses) {
         this.produtoses = produtoses;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="empresa")
-    public Set<Grupos> getGruposes() {
+    public Set getGruposes() {
         return this.gruposes;
     }
     
-    public void setGruposes(Set<Grupos> gruposes) {
+    public void setGruposes(Set gruposes) {
         this.gruposes = gruposes;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="empresa")
-    public Set<Formaspgto> getFormaspgtos() {
+    public Set getFormaspgtos() {
         return this.formaspgtos;
     }
     
-    public void setFormaspgtos(Set<Formaspgto> formaspgtos) {
+    public void setFormaspgtos(Set formaspgtos) {
         this.formaspgtos = formaspgtos;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="empresa")
-    public Set<Tabelaprecos> getTabelaprecoses() {
+    public Set getTabelaprecoses() {
         return this.tabelaprecoses;
     }
     
-    public void setTabelaprecoses(Set<Tabelaprecos> tabelaprecoses) {
+    public void setTabelaprecoses(Set tabelaprecoses) {
         this.tabelaprecoses = tabelaprecoses;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="empresa")
-    public Set<Clientes> getClienteses() {
+    public Set getClienteses() {
         return this.clienteses;
     }
     
-    public void setClienteses(Set<Clientes> clienteses) {
+    public void setClienteses(Set clienteses) {
         this.clienteses = clienteses;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="empresa")
-    public Set<Pedidos> getPedidoses() {
+    public Set getPedidoses() {
         return this.pedidoses;
     }
     
-    public void setPedidoses(Set<Pedidos> pedidoses) {
+    public void setPedidoses(Set pedidoses) {
         this.pedidoses = pedidoses;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="empresa")
-    public Set<Usuario> getUsuarios() {
+    public Set getUsuarios() {
         return this.usuarios;
     }
     
-    public void setUsuarios(Set<Usuario> usuarios) {
+    public void setUsuarios(Set usuarios) {
         this.usuarios = usuarios;
     }
 
