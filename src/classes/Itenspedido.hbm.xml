@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 24/06/2017 11:39:25 by Hibernate Tools 4.3.1 -->
+<!-- Generated 27/06/2017 20:29:40 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="classes.Itenspedido" table="itenspedido" schema="public" optimistic-lock="version">
         <composite-id name="id" class="classes.ItenspedidoId">
@@ -23,11 +23,9 @@
             <column name="ippedido" not-null="true" />
             <column name="ipemresa" not-null="true" />
         </many-to-one>
-        <many-to-one name="tabelaprecosdetalhes" class="classes.Tabelaprecosdetalhes" update="false" insert="false" fetch="select">
+        <property name="iptabelapreco" type="int">
             <column name="iptabelapreco" not-null="true" />
-            <column name="ipproduto" not-null="true" />
-            <column name="ipemresa" not-null="true" />
-        </many-to-one>
+        </property>
         <property name="ipquantidade" type="big_decimal">
             <column name="ipquantidade" precision="15" not-null="true" />
         </property>

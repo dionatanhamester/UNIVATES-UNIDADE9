@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 24/06/2017 11:39:25 by Hibernate Tools 4.3.1 -->
+<!-- Generated 27/06/2017 20:29:40 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="classes.Tabelaprecosdetalhes" table="tabelaprecosdetalhes" schema="public" optimistic-lock="version">
         <composite-id name="id" class="classes.TabelaprecosdetalhesId">
@@ -18,13 +18,5 @@
         <property name="tdpreco" type="big_decimal">
             <column name="tdpreco" precision="15" not-null="true" />
         </property>
-        <set name="itenspedidos" table="itenspedido" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="iptabelapreco" not-null="true" />
-                <column name="ipproduto" not-null="true" />
-                <column name="ipemresa" not-null="true" />
-            </key>
-            <one-to-many class="classes.Itenspedido" />
-        </set>
     </class>
 </hibernate-mapping>

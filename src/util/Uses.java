@@ -8,11 +8,15 @@ package util;
 
 import controller.ClientesDAO;
 import classes.Clientes;
+import classes.Formaspgto;
 import classes.Grupos;
+import classes.Pedidos;
 import classes.Produtos;
 import classes.Tabelaprecos;
 import classes.Tabelaprecosdetalhes;
+import controller.FormasPgtoDAO;
 import controller.GruposDAO;
+import controller.PedidosDAO;
 import controller.ProdutosDAO;
 import controller.TabelaPrecosDAO;
 import controller.TabelaPrecosDetalhesDAO;
@@ -214,7 +218,49 @@ public class Uses {
                      
                      dadosTabela.add(linha);
                 }                
-            }
+            } else if (tabela.equals(Formaspgto.class)){                        
+                cabecalho.setSize(2);
+                cabecalho.setSize(2);
+                cabecalho.set(0, "Código");
+                cabecalho.set(1, "Descrição");                      
+                campos.setSize(2);
+                campos.set(0, "FPCODIGO");
+                campos.set(1, "FPDESCRICAO");                
+                
+                FormasPgtoDAO formaspgtoDAO = new FormasPgtoDAO();                
+                List<Formaspgto> listData = formaspgtoDAO.consultaSQL(vSQL);
+                
+                for (int i = 0; i < listData.size(); i++){                    
+                    Vector<Object> linha = new Vector<Object>();                                                            
+                     linha.add(String.valueOf(listData.get(i).getId().getFpcodigo()));
+                     linha.add(listData.get(i).getFpdescricao());                                  
+                     
+                     dadosTabela.add(linha);
+                }                
+            } else if (tabela.equals(Pedidos.class)){                        
+                cabecalho.setSize(2);
+                cabecalho.setSize(2);
+                cabecalho.set(0, "Pedido");
+                cabecalho.set(1, "Cliente");
+                campos.setSize(2);
+                campos.set(0, "PEPEDIDO");
+                campos.set(1, "CLNOME");            
+                
+                PedidosDAO pedidosDAO = new PedidosDAO();                
+                List<Pedidos> listData = pedidosDAO.consultaSQL(vSQL);
+                
+                for (int i = 0; i < listData.size(); i++){                    
+                    Vector<Object> linha = new Vector<Object>();                                                            
+                    
+                    ClientesDAO clientesDAO = new ClientesDAO();                    
+                    Clientes clie = clientesDAO.getCliente(listData.get(i).getId().getPeempresa(), listData.get(i).getPecliente());
+                    
+                     linha.add(String.valueOf(listData.get(i).getId().getPepedido()));
+                     linha.add(clie.getClnome());                                  
+                     
+                     dadosTabela.add(linha);
+                }                
+            }                
         } catch (Exception e)
         {
             System.out.println("problemas para popular tabela...");

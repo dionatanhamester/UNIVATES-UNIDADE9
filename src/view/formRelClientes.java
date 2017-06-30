@@ -5,6 +5,7 @@
  */
 package view;
 
+import application.Main;
 import classes.Clientes;
 import controller.ClientesDAO;
 import java.util.ArrayList;
@@ -12,6 +13,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
+import javax.swing.JInternalFrame;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -20,6 +23,7 @@ import net.sf.jasperreports.view.JasperViewer;
 import reportclasses.RelClientes;
 import util.CaixaDeDialogo;
 import util.Uses;
+import static view.formInicial.jDesktopPane1;
 
 
 
@@ -110,43 +114,40 @@ public class formRelClientes extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGeraRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGeraRelatorioActionPerformed
-                
-        /*
+                                
+        String vSQL = "FROM Clientes where clcodigo is not null ";                
+        if (edtFiltroNome.getText().length() > 0){
+            vSQL = vSQL + " AND UPPER(CLNOME) LIKE '%" + edtFiltroNome.getText().trim().toUpperCase() + "%' ";
+        }        
+        vSQL = vSQL + " ORDER BY CLNOME";
         
-        resultClientes = clientesDAO.getInstance().consultaSQL(sql);
-        
-        JRResultSetDataSource relatResult = new JRResultSetDataSource(resultClientes);*/
-        
-        String vSQL = "FROM Clientes where clcodigo is not null ";
-        ClientesDAO clientesDAO = new ClientesDAO();
+        ClientesDAO clientesDAO     = new ClientesDAO();
         List<Clientes> listClientes = clientesDAO.consultaSQL(vSQL);
+        List<RelClientes> listRel   = new ArrayList<RelClientes>();
         
+        for (int i = 0; i < listClientes.size() ; i++){                    
+            RelClientes rel = new RelClientes();
+            rel.setEmrazaosocial(Main.empresaSelecionada.getEmrazaosocial());
+            rel.setEmfantasia(Main.empresaSelecionada.getEmfantasia());
+            rel.setEmcidade(Main.empresaSelecionada.getEmcidade());
+            rel.setEmcnpj(Main.empresaSelecionada.getEmcnpj());
+            rel.setEmuf(Main.empresaSelecionada.getEmuf());
+            rel.setClmatricula(listClientes.get(i).getClmatricula());
+            rel.setClnome(listClientes.get(i).getClnome());
+            rel.setClcidade(listClientes.get(i).getClcidade());
+            rel.setCluf(listClientes.get(i).getCluf());
+            rel.setClfone(listClientes.get(i).getClfone());
+            rel.setClemail(listClientes.get(i).getClemail());
         
-        List<RelClientes> listRel = new ArrayList<RelClientes>();
-        
-        RelClientes rel = new RelClientes();
-        rel.setEmrazaosocial("setEmrazaosocial");
-        rel.setEmfantasia("setEmfantasia");
-        rel.setEmcidade("setEmcidade");
-        rel.setEmcnpj("setEmcnpj");
-        rel.setEmuf("setEmuf");
-        rel.setClmatricula("setClmatricula");
-        rel.setClnome("setClnome");
-        rel.setClcidade("setClcidade");
-        rel.setCluf("setCluf");
-        rel.setClfone("setClfone");
-        rel.setClemail("setClemail");
-        
-        listRel.add(rel);
-        listRel.add(rel);
-        listRel.add(rel);
-        
+            listRel.add(rel);
+        }                        
         JasperPrint jpPrint = null;
         try {
             jpPrint = JasperFillManager.fillReport("iReport/RelatorioClientes.jasper", new HashMap(), new JRBeanCollectionDataSource(listRel));
-            JasperViewer jpViewer = new JasperViewer(jpPrint , false); //false - não encerra a aplicação ao fechar a janela
+            JasperViewer jpViewer = new JasperViewer(jpPrint , false); //false - não encerra a aplicação ao fechar a janela                       
             jpViewer.setVisible(true);
-            jpViewer.toFront(); //apresenta o relatório acima das outras janelas
+            jpViewer.toFront(); //apresenta o relatório acima das outras janelas            
+            jpViewer.setAlwaysOnTop(true);            
         } catch (JRException ex) {
             Logger.getLogger(formRelClientes.class.getName()).log(Level.SEVERE, null, ex);
         }        

@@ -24,5 +24,6 @@ public class TabelaPrecosDAO extends CustomDAO<Tabelaprecos>{
         
         return sequences.getID(Tabelaprecos.class);
     }
+          
     
 }

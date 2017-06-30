@@ -10,9 +10,21 @@ import application.Main;
 import java.awt.Color;
 import java.util.Vector;
 import classes.Clientes;
+import classes.Formaspgto;
+import classes.Itenspedido;
 
 import classes.Pedidos;
+import classes.PedidosId;
 import classes.Produtos;
+import classes.Tabelaprecosdetalhes;
+import controller.FormasPgtoDAO;
+import controller.ClientesDAO;
+import controller.PedidosDAO;
+import controller.ProdutosDAO;
+import controller.ItensPedidoDAO;
+import controller.TabelaPrecosDetalhesDAO;
+import java.math.BigDecimal;
+import java.sql.SQLException;
 import util.CaixaDeDialogo;
 import util.Uses;
 import static view.formInicial.jframe_inicial;
@@ -26,15 +38,21 @@ public class formVendas extends javax.swing.JInternalFrame {
     private final String _DEFAULT            = "default";
     private int rowItensPedidoDetalhesClick = -1;
     private Pedidos pedido = null;
-
+    private PedidosDAO pedidosDAO = new PedidosDAO();
     
-    //private ItensPedido itensPedido = null;
-
+    private Itenspedido itensPedido       = null;
+    private ItensPedidoDAO itenspedidoDAO = new ItensPedidoDAO();
+        
+    private Tabelaprecosdetalhes tabelaprecosdetalhes = null;
+    private TabelaPrecosDetalhesDAO tabelaprecosdetalhesDAO = new TabelaPrecosDetalhesDAO();
     
-
+    private Formaspgto formapgto       = null;
+    private FormasPgtoDAO formapgtoDAO = new FormasPgtoDAO();
+    
+    private ProdutosDAO produtosDAO     = new ProdutosDAO();
     private Produtos produtoSelecionado = null;
     
-
+    private ClientesDAO clientesDAO = new ClientesDAO();
     private Clientes cliente = null;
     
     private static CaixaDeDialogo mensagem;
@@ -71,9 +89,9 @@ public class formVendas extends javax.swing.JInternalFrame {
 
         Vector<String> campos = new Vector<String>();
         campos.setSize(3);
-        campos.set(0, "IP_PRODUTO");
-        campos.set(1, "PR_NOME");
-        campos.set(2, "IP_VALORTOTAL");
+        campos.set(0, "IPPRODUTO");
+        campos.set(1, "PRNOME");
+        campos.set(2, "IPVALORTOTAL");
         
     }
     
@@ -81,7 +99,28 @@ public class formVendas extends javax.swing.JInternalFrame {
     Responsável por Salvar dos dados inseridos ou alterados pelo Usuário
     */
     private void salvarDadosPedido() throws Exception{
-                               
+        
+        pedido.setPecliente(cliente.getId().getClcodigo());
+        pedido.setPeduracao(Integer.valueOf(Ed_Duracao.getText().trim()));
+        pedido.setPeproducaoleite(BigDecimal.valueOf(Float.valueOf(Ed_ProducaoTotal.getText().trim())));
+        pedido.setPepesovivo(BigDecimal.valueOf(Float.valueOf(Ed_PesoVivo.getText().trim())));
+        pedido.setPenrolactantes(Integer.valueOf(Ed_Lactantes.getText().trim()));
+        pedido.setPenropreparto(Integer.valueOf(Ed_PreParto.getText().trim()));
+        pedido.setPenronovilhas(Integer.valueOf(Ed_Novilhas.getText().trim()));
+        pedido.setPenroterneiras2mes(Integer.valueOf(Ed_Terneiras2.getText().trim()));
+        pedido.setPenroterneiras6mes(Integer.valueOf(Ed_Terneiras6.getText().trim()));    
+        pedido.setPeformapgto(formapgto.getId().getFpcodigo());
+        pedido.setPeobs("");
+        
+        if (pedido.getId() == null){
+            PedidosId idpedido = new PedidosId(
+                    Main.empresaSelecionada.getEmcodigo(), clientesDAO.getAutoIncrement());
+            
+            pedido.setId(idpedido);
+            pedidosDAO.Insert(pedido);
+        } else {
+            pedidosDAO.Update(pedido);
+        }                                                           
     }
     
     /*
@@ -138,7 +177,7 @@ public class formVendas extends javax.swing.JInternalFrame {
     {
         String[] vStr = null;
         //função responsavel por carregar os campos da tela de consulta        
-        camposCombo[0] = "Nome;CL_NOME";
+        camposCombo[0] = "Pedido;PEPEDIDO";
         
         cbCampos.removeAllItems();
         for (int i = 0; i < camposCombo.length; i++)
@@ -148,7 +187,7 @@ public class formVendas extends javax.swing.JInternalFrame {
         }
 
         //função responsavel por carregar os campos da tela de consulta        
-        ordenaCombo[0] = "Nome;CL_NOME";
+        ordenaCombo[0] = "Pedido;PEPEDIDO";
 
         cbOrdenacao.removeAllItems();
         for (int i = 0; i < ordenaCombo.length; i++)
@@ -469,18 +508,17 @@ public class formVendas extends javax.swing.JInternalFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbCampos, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel10))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel21, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Ed_Consulta, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbOrdenacao, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.TRAILING))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbOrdenacao, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Ed_Consulta, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbCampos, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addComponent(BotaoConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(48, 48, 48))
@@ -941,15 +979,12 @@ public class formVendas extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                                    .addComponent(Ed_Produto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4)
-                                    .addComponent(F3_Produtos))
-                                .addGap(3, 3, 3))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(Ed_NomProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(1, 1, 1)))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                                .addComponent(Ed_Produto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel4)
+                                .addComponent(F3_Produtos))
+                            .addComponent(Ed_NomProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(3, 3, 3)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Ed_Quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)))
@@ -1125,16 +1160,20 @@ public class formVendas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_gridConsultaPropertyChange
 
     private void BotaoConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoConsultaActionPerformed
+        //Monta a SQL para trazer os dados
+        String[] vCampo = camposCombo[cbCampos.getSelectedIndex()].split(";");
+        
+        String vSQL = "FROM Pedidos where pepedido is not null ";
 
-        Vector<String> cabecalho = new Vector<String>();
-        cabecalho.setSize(2);
-        cabecalho.set(0, "Pedido");
-        cabecalho.set(1, "Cliente");
+        String vStr = Ed_Consulta.getText().trim();
+        if (Ed_Consulta.getText().length() > 0){
+            vSQL = vSQL + " AND UPPER(" + vCampo[1] + ") LIKE '%" + Ed_Consulta.getText().trim().toUpperCase() + "%' ";
+        }
 
-        Vector<String> campos = new Vector<String>();
-        campos.setSize(2);
-        campos.set(0, "PE_PEDIDO");
-        campos.set(1, "CL_NOME");
+        String[] vOrdem = ordenaCombo[cbOrdenacao.getSelectedIndex()].split(";");
+        vSQL = vSQL + "ORDER BY " + vOrdem[1];
+        
+        Uses.popularTabela(gridConsulta, vSQL, Pedidos.class);           
 
     }//GEN-LAST:event_BotaoConsultaActionPerformed
 
@@ -1158,15 +1197,15 @@ public class formVendas extends javax.swing.JInternalFrame {
     * Busca as informações de Cliente - Para seleção
     */
     private void buscaClienteAposF3(){
-        try{            
+         try{            
             if (! Main.vValorPesquisa.equals("")){
                 Ed_Cliente.setText(Main.vValorPesquisa);                                
                 //zera a variavel;
                 Main.vValorPesquisa = "";
             }
             if (!Ed_Cliente.getText().toString().trim().equals("")){
-                
-                
+                cliente = clientesDAO.getCliente(Main.empresaSelecionada.getEmcodigo(), Integer.valueOf(Ed_Cliente.getText().toString().trim()));    
+                Ed_NomCliente.setText(cliente.getClnome());
                 
             } else {
                 cliente = null;                        
@@ -1180,40 +1219,80 @@ public class formVendas extends javax.swing.JInternalFrame {
      * usca as infromações de  Formas de Pagamento - Para Seleção
      */
     private void buscaFormaPagamentoAposF3(){
-
+        try{            
+            if (! Main.vValorPesquisa.equals("")){
+                Ed_FormasPgto.setText(Main.vValorPesquisa);                                
+                //zera a variavel;
+                Main.vValorPesquisa = "";
+            }
+            if (!Ed_FormasPgto.getText().toString().trim().equals("")){
+                formapgto = formapgtoDAO.getFormaPgto(Main.empresaSelecionada.getEmcodigo(), Integer.valueOf(Ed_FormasPgto.getText().toString().trim()));    
+                Ed_NomFormaPgto.setText(formapgto.getFpdescricao());                
+            } else {
+                formapgto = null;                        
+            }                                   
+        } catch (Exception e){
+            mensagem.exibirMensagem(jframe_inicial,"Ocorreu um erro durante a localização do produto.Verifique!" + "\n" + e.getMessage(), 'e');            
+        }
     }
     
     /**
      * Busca as informações de  produto - Para seleção
      */
     private void buscaProdutoAposF3(){
-        
+        try{            
+            if (! Main.vValorPesquisa.equals("")){
+                Ed_Produto.setText(Main.vValorPesquisa);                                
+                //zera a variavel;
+                Main.vValorPesquisa = "";
+            }
+            if (!Ed_Produto.getText().toString().trim().equals("")){
+                produtoSelecionado = produtosDAO.getProduto(Main.empresaSelecionada.getEmcodigo(),Integer.valueOf(Ed_Produto.getText().toString().trim()));    
+                Ed_NomProduto.setText(produtoSelecionado.getPrnome());
+                
+            } else {
+                produtoSelecionado = null;                        
+            }                                   
+        } catch (Exception e){
+            mensagem.exibirMensagem(jframe_inicial,"Ocorreu um erro durante a localização do produto.Verifique!" + "\n" + e.getMessage(), 'e');            
+        }        
     }
     
     /**
      * Busca as informações para Tabela de Preços - Para Seleção
      */
     private void buscaTabelaPrecoAposF3(){
-    
+        try{            
+            if (! Main.vValorPesquisa.equals("")){
+                Ed_Tabela.setText(Main.vValorPesquisa);                                
+                //zera a variavel;
+                Main.vValorPesquisa = "";
+            }
+            if (!Ed_Tabela.getText().toString().trim().equals("")){
+                tabelaprecosdetalhes = tabelaprecosdetalhesDAO.getTabela( Integer.valueOf(Main.empresaSelecionada.getEmcodigo()), 
+                                                                          Integer.valueOf(Ed_Tabela.getText().toString().trim()),
+                                                                          Integer.valueOf(Ed_Produto.getText().toString().trim())              
+                                                                         );    
+               
+                Ed_ValorUnit.setText(String.valueOf(tabelaprecosdetalhes.getTdpreco()));
+            } else {
+                tabelaprecosdetalhes = null;     
+                Ed_Tabela.setText("");
+                Ed_ValorUnit.setText("");
+            }                                   
+        } catch (Exception e){
+            mensagem.exibirMensagem(jframe_inicial,"Ocorreu um erro durante a localização do produto.Verifique!" + "\n" + e.getMessage(), 'e');            
+            Ed_Tabela.setText("");
+            Ed_ValorUnit.setText("");
+        }    
     }
     private void F3_ClienteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_F3_ClienteFocusLost
 
     }//GEN-LAST:event_F3_ClienteFocusLost
 
     private void F3_ClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_F3_ClienteActionPerformed
-        String vSQL = "select * from clientes where cl_codigo is not null";        
-                       
-        Vector<String> cabecalho = new Vector<String>();
-        cabecalho.setSize(2);
-        cabecalho.set(0, "Código");
-        cabecalho.set(1, "Nome");
-
-        Vector<String> campos = new Vector<String>();
-        campos.setSize(2);
-        campos.set(0, "CL_CODIGO");
-        campos.set(1, "CL_NOME");
-
-      //  Uses.ChamaTelaPesquisa(Ed_Cliente, cabecalho, campos, vSQL);              
+        String vSQL = "FROM Clientes where clcodigo is not null ";              
+        Uses.ChamaTelaPesquisa(Ed_Cliente, vSQL, Clientes.class); 
     }//GEN-LAST:event_F3_ClienteActionPerformed
 
     private void Ed_PrePartoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Ed_PrePartoFocusLost
@@ -1238,19 +1317,8 @@ public class formVendas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_F3_FormaPgtoFocusLost
 
     private void F3_FormaPgtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_F3_FormaPgtoActionPerformed
-        String vSQL = "select * from formaspgto where fp_codigo is not null";        
-                       
-        Vector<String> cabecalho = new Vector<String>();
-        cabecalho.setSize(2);
-        cabecalho.set(0, "Código");
-        cabecalho.set(1, "Descrição");
-
-        Vector<String> campos = new Vector<String>();
-        campos.setSize(2);
-        campos.set(0, "FP_CODIGO");
-        campos.set(1, "FP_DESCRICAO");
-
-    //    Uses.ChamaTelaPesquisa(Ed_FormasPgto,cabecalho, campos, vSQL); 
+        String vSQL = "FROM Formaspgto where fpcodigo is not null ";              
+        Uses.ChamaTelaPesquisa(Ed_FormasPgto, vSQL, Formaspgto.class); 
     }//GEN-LAST:event_F3_FormaPgtoActionPerformed
 
     private void gridDetalhesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gridDetalhesMouseClicked
@@ -1272,23 +1340,38 @@ public class formVendas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_F3_ProdutosFocusLost
 
     private void F3_ProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_F3_ProdutosActionPerformed
-        String vSQL = "select * from produtos where pr_codigo is not null";
-
-        Vector<String> cabecalho = new Vector<String>();
-        cabecalho.setSize(2);
-        cabecalho.set(0, "Código");
-        cabecalho.set(1, "Nome");
-
-        Vector<String> campos = new Vector<String>();
-        campos.setSize(2);
-        campos.set(0, "PR_CODIGO");
-        campos.set(1, "PR_NOME");
-
+        String vSQL = "FROM Produtos where prcodigo is not null ";              
+        Uses.ChamaTelaPesquisa(Ed_Produto, vSQL, Produtos.class); 
         
     }//GEN-LAST:event_F3_ProdutosActionPerformed
 
     private void BotaoEditarDetalhesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoEditarDetalhesActionPerformed
-            
+        if (rowItensPedidoDetalhesClick >= 0){                            
+                                    
+                try{
+                    Itenspedido item = itenspedidoDAO.getItensPedido(pedido.getId().getPeempresa(),
+                                                                     pedido.getId().getPepedido(),
+                                                                     Integer.valueOf(gridDetalhes.getValueAt(rowItensPedidoDetalhesClick, 0).toString()) );
+                
+                    if (item != null){                            
+                        this.itensPedido = item; 
+                        
+                        tabelaprecosdetalhes = tabelaprecosdetalhesDAO.getTabela(itensPedido.getId().getIpemresa(), 
+                                                                                 itensPedido.getIptabelapreco(), 
+                                                                                 itensPedido.getId().getIpproduto() );
+                        
+                        produtoSelecionado   = produtosDAO.getProduto(itensPedido.getId().getIpemresa(), itensPedido.getId().getIpproduto());
+                        this.setDataItensPedido();
+                    } else
+                    {
+                        //como nao tem nada
+                    }
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());                    
+                }
+            }
+
+        arrumaBotoes(_MODIFICACAO);            
     }//GEN-LAST:event_BotaoEditarDetalhesActionPerformed
 
     private void Ed_TabelaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Ed_TabelaFocusLost

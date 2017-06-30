@@ -9,21 +9,27 @@ package reportclasses;
  *
  * @author Dionatan
  */
-public class RelClientes {
-
+public class RelProdutos {
+    private int emcodigo;
     private String emrazaosocial;
     private String emfantasia;
     private String emcidade;
+    private String embairro;
     private String emcnpj;
     private String emuf;
-    private String clmatricula;
-    private String clnome;
-    private String clcidade;
-    private String cluf;
-    private String clfone;
-    private String clemail;
+    private String emcep;    
+    private String prnome;
+    private String prunidade;
+    private String grnome;   
+    private int prcodigo;
     
-    public RelClientes(){}
+    public int getEmcodigo(){
+        return this.emcodigo;
+    }
+    
+    public void setEmcodigo(int emcodigo){
+        this.emcodigo = emcodigo;
+    }   
     
     public String getEmrazaosocial (){
         return emrazaosocial;
@@ -49,6 +55,14 @@ public class RelClientes {
         this.emcidade   = emcidade;
     }
     
+    public String getEmbairro(){
+        return embairro;
+    }
+    
+    public void setEmbairro(String embairro){
+        this.embairro = embairro;
+    }
+    
     public String getEmcnpj (){
         return emcnpj;
     }
@@ -65,51 +79,44 @@ public class RelClientes {
         this.emuf   = emuf;
     }
     
-    public String getClmatricula (){
-        return clmatricula;
+    public String getEmcep(){
+        return emcep;        
     }
     
-    public void setClmatricula (String clmatricula){
-        this.clmatricula   = clmatricula;
+    public void setEmcep(String emcep){
+        this.emcep = emcep;
+    }       
+    
+    public void setPrnome ( String prnome){
+        this.prnome  = prnome;
     }
     
-    public String getClnome (){
-        return clnome;
+    public String getPrnome (){
+        return this.prnome;
     }
     
-    public void setClnome (String clnome){
-        this.clnome   = clnome;
+    
+    public void setPrunidade ( String prunidade){
+        this.prunidade = prunidade;
     }
     
-    public String getClcidade (){
-        return clcidade;
+    public String getPrunidade(){
+        return this.prunidade  ;
     }
     
-    public void setClcidade (String clcidade){
-        this.clcidade   = clcidade;
-    }
-
-    public String getCluf (){
-        return cluf;
+    public void setGrnome ( String grnome){
+        this.grnome  = grnome;
     }
     
-    public void setCluf (String cluf){
-        this.cluf   = cluf;
+    public String getGrnome(){
+        return this.grnome  ;
+    }                              
+    
+    public void setPrcodigo(int codigo){
+        this.prcodigo = codigo;
     }
     
-    public String getClfone (){
-        return clfone;
-    }
-    
-    public void setClfone (String clfone){
-        this.clfone   = clfone;
-    }
-
-    public String getClemail (){
-        return clemail;
-    }
-    
-    public void setClemail (String clemail){
-        this.clemail   = clemail;
+    public int getPrcodigo(){
+        return this.prcodigo;
     }
 }

@@ -62,6 +62,7 @@ public class formInicial extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         MenuItemGrupos = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         MenuRelatorios = new javax.swing.JMenu();
         menuRelatorioClientes = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -126,6 +127,15 @@ public class formInicial extends javax.swing.JFrame {
             }
         });
         jMenu4.add(MenuItemGrupos);
+
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem3.setText("Formas Pgto");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem3);
 
         menuCadastros.add(jMenu4);
 
@@ -229,6 +239,12 @@ public class formInicial extends javax.swing.JFrame {
         formVendas frmVendas = new formVendas();        
         abrirForm(frmVendas);            // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+       
+        formFormasPgto frmFormasPgto = new formFormasPgto();        
+        abrirForm(frmFormasPgto);         // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
     /**
      * Realiza o processo de exibir um JInternalFrame
      * @param form 
@@ -294,6 +310,7 @@ public class formInicial extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenu menuCadastros;

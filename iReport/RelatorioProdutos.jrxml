@@ -8,39 +8,22 @@
 		<defaultValueExpression><![CDATA["C:\\Users\\Dionatan\\Desktop\\"]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select *
+		<![CDATA[select em.emrazaosocial, em.emfantasia, em.emcidade, em.emcnpj,
+em.emuf, pr.prnome, pr.prunidade, gr.grnome
 from empresa em, grupos gr, produtos pr
 where
-   em.em_codigoweb = gr.gr_empresa and
-   em.em_codigoweb = pr.pr_empresa and
-   pr.pr_grupo = gr.gr_codigo]]>
+   em.emcodigo = gr.grempresa and
+   em.emcodigo = pr.prempresa and
+   pr.prgrupo = gr.grcodigo]]>
 	</queryString>
-	<field name="em_codigoweb" class="java.lang.Integer"/>
-	<field name="em_razaosocial" class="java.lang.String"/>
-	<field name="em_fantasia" class="java.lang.String"/>
-	<field name="em_cnpj" class="java.lang.String"/>
-	<field name="em_cep" class="java.lang.String"/>
-	<field name="em_uf" class="java.lang.String"/>
-	<field name="em_bairro" class="java.lang.String"/>
-	<field name="em_cidade" class="java.lang.String"/>
-	<field name="em_endereco" class="java.lang.String"/>
-	<field name="em_email" class="java.lang.String"/>
-	<field name="em_telefone" class="java.lang.String"/>
-	<field name="em_data_atu" class="java.sql.Date"/>
-	<field name="em_hora_atu" class="java.sql.Time"/>
-	<field name="gr_empresa" class="java.lang.Integer"/>
-	<field name="gr_codigo" class="java.lang.Integer"/>
-	<field name="gr_nome" class="java.lang.String"/>
-	<field name="gr_data_atu" class="java.sql.Date"/>
-	<field name="gr_hora_atu" class="java.sql.Time"/>
-	<field name="pr_empresa" class="java.lang.Integer"/>
-	<field name="pr_codigo" class="java.lang.Integer"/>
-	<field name="pr_nome" class="java.lang.String"/>
-	<field name="pr_grupo" class="java.lang.Integer"/>
-	<field name="pr_unidade" class="java.lang.String"/>
-	<field name="pr_inativo" class="java.lang.String"/>
-	<field name="pr_data_atu" class="java.sql.Date"/>
-	<field name="pr_hora_atu" class="java.sql.Time"/>
+	<field name="emrazaosocial" class="java.lang.String"/>
+	<field name="emfantasia" class="java.lang.String"/>
+	<field name="emcidade" class="java.lang.String"/>
+	<field name="emcnpj" class="java.lang.String"/>
+	<field name="emuf" class="java.lang.String"/>
+	<field name="prnome" class="java.lang.String"/>
+	<field name="prunidade" class="java.lang.String"/>
+	<field name="grnome" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -65,35 +48,35 @@ where
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{em_fantasia}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{emfantasia}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="171" y="8" width="351" height="20" uuid="3306928a-c308-4481-9da3-5df5cb71d045"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{em_razaosocial}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{emrazaosocial}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="425" y="48" width="100" height="20" uuid="5e1589c9-03c4-449b-a117-373c7c1b8231"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{em_uf}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{emuf}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="171" y="48" width="230" height="20" uuid="a44a3cfc-0eab-455e-b7e3-73288e58e3ed"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{em_cidade}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{emcidade}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="171" y="68" width="230" height="20" uuid="acd8dcc2-0522-410e-aaf0-8254deccba80"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{em_cnpj}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{emcnpj}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="401" y="49" width="24" height="20" uuid="9cfb0870-e938-4640-9b51-7414c9313877"/>
@@ -159,20 +142,20 @@ where
 		<band height="20" splitType="Stretch">
 			<elementGroup/>
 			<textField>
-				<reportElement x="3" y="0" width="72" height="20" uuid="697eb2f4-cefb-4852-8070-95ec1150f2af"/>
-				<textFieldExpression><![CDATA[$F{pr_codigo}]]></textFieldExpression>
-			</textField>
-			<textField>
 				<reportElement x="75" y="0" width="250" height="20" uuid="4b5e41e4-32b1-4f8e-8d6b-6e28b14a4a05"/>
-				<textFieldExpression><![CDATA[$F{pr_nome}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{prnome}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="325" y="0" width="100" height="20" uuid="ab273f19-38d4-4ecd-a0fe-5fd145f7c9f9"/>
-				<textFieldExpression><![CDATA[$F{pr_unidade}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{prunidade}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="425" y="0" width="100" height="20" uuid="8e1a25f8-3e85-4ac6-adf3-aee3f91918b8"/>
-				<textFieldExpression><![CDATA[$F{gr_nome}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{grnome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3" y="0" width="54" height="20" uuid="03abea5e-797d-4014-98ee-afb310403db8"/>
+				<textFieldExpression><![CDATA[$F{prnome}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

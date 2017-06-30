@@ -5,8 +5,22 @@
  */
 package view;
 
+import application.Main;
 import java.util.List;
 import classes.Grupos;
+import classes.Produtos;
+import controller.GruposDAO;
+import controller.ProdutosDAO;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import reportclasses.RelProdutos;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 import util.CaixaDeDialogo;
 import util.Uses;
 
@@ -39,7 +53,24 @@ public class formRelProdutos extends javax.swing.JInternalFrame {
      * Carrega dados de Grupos para o JCombobox
      */
     private void carregaComboBoxGrupos(){
+        String sql = "FROM Grupos where grempresa = "+ String.valueOf(Main.empresaSelecionada.getEmcodigo());
+        GruposDAO gruposDAO = new GruposDAO();
         
+        try {
+            List<Grupos> listGrupos = gruposDAO.consultaSQL(sql);           
+                        
+            gruposCadastrados = new ArrayList<>();
+            cbGrupos.removeAllItems();
+            cbGrupos.addItem("Todos");                
+            for (int i = 0; i < listGrupos.size(); i++){
+                Grupos grupo = listGrupos.get(i);
+                
+                gruposCadastrados.add(grupo);
+                cbGrupos.addItem(grupo.getGrnome());                
+            }                       
+        } catch (Exception ex) {
+            Logger.getLogger(formProdutos.class.getName()).log(Level.SEVERE, null, ex);
+        }  
     }
 
     /**
@@ -110,7 +141,50 @@ public class formRelProdutos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGeraRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGeraRelatorioActionPerformed
-       
+                         
+        String vSQL = "FROM Produtos where prcodigo is not null ";                
+        
+        if (cbGrupos.getSelectedIndex() > 0){
+            vSQL = vSQL + " and prgrupo = "+ String.valueOf(gruposCadastrados.get(cbGrupos.getSelectedIndex()).getId().getGrcodigo());
+        }
+        
+        vSQL = vSQL + " ORDER BY prnome";
+        GruposDAO gruposDAO         = new GruposDAO();
+        ProdutosDAO produtosDAO     = new ProdutosDAO();
+        List<Produtos> listProdutos = produtosDAO.consultaSQL(vSQL);
+        List<RelProdutos> listRel   = new ArrayList<RelProdutos>();
+        
+        for (int i = 0; i < listProdutos.size() ; i++){                    
+            Grupos grupo = gruposDAO.getGrupo(Main.empresaSelecionada.getEmcodigo(), listProdutos.get(i).getPrgrupo());
+            
+            RelProdutos rel = new RelProdutos();
+            
+            rel.setEmcodigo(Main.empresaSelecionada.getEmcodigo());
+            rel.setEmrazaosocial(Main.empresaSelecionada.getEmrazaosocial());
+            rel.setEmfantasia(Main.empresaSelecionada.getEmfantasia());
+            rel.setEmcidade(Main.empresaSelecionada.getEmcidade());
+            rel.setEmbairro(Main.empresaSelecionada.getEmbairro());
+            rel.setEmcnpj(Main.empresaSelecionada.getEmcnpj());
+            rel.setEmuf(Main.empresaSelecionada.getEmuf());
+            rel.setEmcep(Main.empresaSelecionada.getEmcep());
+            
+            rel.setPrcodigo(listProdutos.get(i).getId().getPrcodigo());
+            rel.setPrnome(listProdutos.get(i).getPrnome());
+            rel.setPrunidade(listProdutos.get(i).getPrunidade());
+            rel.setGrnome(grupo.getGrnome());
+                               
+            listRel.add(rel);
+        }                        
+        JasperPrint jpPrint = null;
+        try {
+            jpPrint = JasperFillManager.fillReport("iReport/RelatorioProdutosNovo.jasper", new HashMap(), new JRBeanCollectionDataSource(listRel));
+            JasperViewer jpViewer = new JasperViewer(jpPrint , false); //false - não encerra a aplicação ao fechar a janela                       
+            jpViewer.setVisible(true);
+            jpViewer.toFront(); //apresenta o relatório acima das outras janelas            
+            jpViewer.setAlwaysOnTop(true);            
+        } catch (JRException ex) {
+            Logger.getLogger(formRelClientes.class.getName()).log(Level.SEVERE, null, ex);
+        }           
     }//GEN-LAST:event_btnGeraRelatorioActionPerformed
 
 

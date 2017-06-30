@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 24/06/2017 11:39:25 by Hibernate Tools 4.3.1 -->
+<!-- Generated 27/06/2017 20:29:40 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="classes.Formaspgto" table="formaspgto" schema="public" optimistic-lock="version">
         <composite-id name="id" class="classes.FormaspgtoId">
@@ -27,12 +27,5 @@
         <property name="fphoraatu" type="time">
             <column name="fphoraatu" length="15" />
         </property>
-        <set name="pedidoses" table="pedidos" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="peformapgto" not-null="true" />
-                <column name="peempresa" not-null="true" />
-            </key>
-            <one-to-many class="classes.Pedidos" />
-        </set>
     </class>
 </hibernate-mapping>

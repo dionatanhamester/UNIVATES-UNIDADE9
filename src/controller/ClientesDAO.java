@@ -6,6 +6,7 @@
 package controller;
 
 import classes.Clientes;
+import java.util.List;
 
 /**
  *
@@ -17,4 +18,16 @@ public class ClientesDAO extends CustomDAO<Clientes>{
         SequencesDAO sequences = new SequencesDAO();        
         return sequences.getID(Clientes.class);
     }
+        
+    public Clientes getCliente(Integer empresa, Integer clie){
+        String vSQL = "FROM Clientes where clempresa = "+String.valueOf(empresa) + " and clcodigo = "+String.valueOf(clie);
+        ClientesDAO clienteDAO = new ClientesDAO();                
+        List<Clientes> listData = clienteDAO.consultaSQL(vSQL);
+        
+        if (listData.size() > 0){
+            return listData.get(0);
+        } else {
+            return null;
+        }
+    }    
 }

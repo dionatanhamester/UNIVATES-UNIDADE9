@@ -23,6 +23,18 @@ public class TabelaPrecosDetalhesDAO extends CustomDAO<Tabelaprecosdetalhes>{
         return -1;
     }
     
+
+    public Tabelaprecosdetalhes getTabela(Integer empresa, Integer tabelapreco, Integer produto){
+        String vSQL = "FROM Tabelaprecosdetalhes where tdempresa = "+String.valueOf(empresa) + " and tdtabelapreco = "+String.valueOf(tabelapreco)+" and tdproduto = "+String.valueOf(produto);                
+        TabelaPrecosDetalhesDAO tabelaprecosdetalhesDAO = new TabelaPrecosDetalhesDAO();                
+        List<Tabelaprecosdetalhes> listData = tabelaprecosdetalhesDAO.consultaSQL(vSQL);        
+        if (listData.size() > 0){
+            return listData.get(0);
+        } else {
+            return null;
+        }
+    }      
+    
     public boolean jaExiste(Integer empresa, Integer tabelapreco, Integer produto){
         String vSQL = "FROM Tabelaprecosdetalhes where tdempresa = "+String.valueOf(empresa) + " and tdtabelapreco = "+String.valueOf(tabelapreco)+" and tdproduto = "+String.valueOf(produto);                
         TabelaPrecosDetalhesDAO tabelaprecosdetalhesDAO = new TabelaPrecosDetalhesDAO();                

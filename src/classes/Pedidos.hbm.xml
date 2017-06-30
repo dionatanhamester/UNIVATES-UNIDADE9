@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 24/06/2017 11:39:25 by Hibernate Tools 4.3.1 -->
+<!-- Generated 27/06/2017 20:29:40 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="classes.Pedidos" table="pedidos" schema="public" optimistic-lock="version">
         <composite-id name="id" class="classes.PedidosId">
@@ -15,21 +15,16 @@
                 <column name="pepedido" />
             </key-property>
         </composite-id>
-        <many-to-one name="clientes" class="classes.Clientes" update="false" insert="false" fetch="select">
-            <column name="pecliente" not-null="true" />
-            <column name="peempresa" not-null="true" />
-        </many-to-one>
         <many-to-one name="empresa" class="classes.Empresa" update="false" insert="false" fetch="select">
-            <column name="peempresa" not-null="true" />
-        </many-to-one>
-        <many-to-one name="formaspgto" class="classes.Formaspgto" update="false" insert="false" fetch="select">
-            <column name="peformapgto" not-null="true" />
             <column name="peempresa" not-null="true" />
         </many-to-one>
         <many-to-one name="usuario" class="classes.Usuario" update="false" insert="false" fetch="select">
             <column name="peusuario" not-null="true" />
             <column name="peempresa" not-null="true" />
         </many-to-one>
+        <property name="pecliente" type="int">
+            <column name="pecliente" not-null="true" />
+        </property>
         <property name="peduracao" type="java.lang.Integer">
             <column name="peduracao" />
         </property>
@@ -71,6 +66,9 @@
         </property>
         <property name="pedata" type="date">
             <column name="pedata" length="13" />
+        </property>
+        <property name="peformapgto" type="int">
+            <column name="peformapgto" not-null="true" />
         </property>
         <property name="pemotivocancelamento" type="string">
             <column name="pemotivocancelamento" />

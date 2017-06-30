@@ -7,6 +7,7 @@ package controller;
 
 import classes.Clientes;
 import classes.Empresa;
+import classes.Formaspgto;
 import classes.Grupos;
 import classes.Produtos;
 import classes.Sequences;
@@ -47,9 +48,10 @@ public class SequencesDAO extends CustomDAO<Sequences>{
            } else if ( table.equals(Tabelaprecos.class)){
                vID = seq.getGentabelaprecos();
                seq.setGentabelaprecos(vID+1);
-           } 
-           
-           
+           }  else if ( table.equals(Formaspgto.class)){
+               vID = seq.getGenformaspgto();
+               seq.setGenformaspgto(vID+1);
+           }                       
            
            SequencesDAO sequencesDAO = new SequencesDAO();
            sequencesDAO.Update(seq);

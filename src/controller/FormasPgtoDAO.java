@@ -5,26 +5,26 @@
  */
 package controller;
 
-import classes.Grupos;
+import classes.Formaspgto;
 import java.util.List;
 
 /**
  *
  * @author Dionatan
  */
-public class GruposDAO extends CustomDAO<Grupos>{
+public class FormasPgtoDAO extends CustomDAO<Formaspgto>{
     
     public Integer getAutoIncrement() {
         SequencesDAO sequences = new SequencesDAO();
         
-        return sequences.getID(Grupos.class);
+        return sequences.getID(Formaspgto.class);
     }
     
     
-    public Grupos getGrupo(Integer empresa, Integer grupo){
-        String vSQL = "FROM Grupos where grempresa = "+String.valueOf(empresa) + " and grcodigo = "+String.valueOf(grupo);
-        GruposDAO gruposDAO = new GruposDAO();                
-        List<Grupos> listData = gruposDAO.consultaSQL(vSQL);
+    public Formaspgto getFormaPgto(Integer empresa, Integer formapgto){
+        String vSQL = "FROM Formaspgto where fpempresa = "+String.valueOf(empresa) + " and fpcodigo = "+String.valueOf(formapgto);
+        FormasPgtoDAO formaspgtoDAO = new FormasPgtoDAO();                
+        List<Formaspgto> listData = formaspgtoDAO.consultaSQL(vSQL);
         
         if (listData.size() > 0){
             return listData.get(0);
