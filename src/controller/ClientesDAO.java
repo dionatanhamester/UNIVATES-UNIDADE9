@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class ClientesDAO extends CustomDAO<Clientes>{
     
-        public Integer getAutoIncrement() {
+    public Integer getAutoIncrement() {
         SequencesDAO sequences = new SequencesDAO();        
         return sequences.getID(Clientes.class);
     }

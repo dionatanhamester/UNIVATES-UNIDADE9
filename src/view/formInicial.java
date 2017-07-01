@@ -68,6 +68,7 @@ public class formInicial extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Minha Venda");
@@ -172,6 +173,14 @@ public class formInicial extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem7);
 
+        jMenuItem4.setText("Parâmetros do Sistema");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem4);
+
         jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
@@ -237,14 +246,19 @@ public class formInicial extends javax.swing.JFrame {
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         
         formVendas frmVendas = new formVendas();        
-        abrirForm(frmVendas);            // TODO add your handling code here:
+        abrirForm(frmVendas);          
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
        
         formFormasPgto frmFormasPgto = new formFormasPgto();        
-        abrirForm(frmFormasPgto);         // TODO add your handling code here:
+        abrirForm(frmFormasPgto);   
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        formParametros frmParametros = new formParametros();        
+        abrirForm(frmParametros);   
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
     /**
      * Realiza o processo de exibir um JInternalFrame
      * @param form 
@@ -311,6 +325,7 @@ public class formInicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenu menuCadastros;
