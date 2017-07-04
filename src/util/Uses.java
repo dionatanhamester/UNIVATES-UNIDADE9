@@ -51,7 +51,7 @@ public class Uses {
     
     /**
      * Posiciona  o JInternalFrame ao Centro da tela
-     * @param componente 
+     * @param componente JInternalFrame a ser posicionado
      */
     public static void center(Component componente)
     {
@@ -71,9 +71,9 @@ public class Uses {
   
     /**
      * Verifica se determinado JInternalFrame já está aberto
-     * @param jDesktopPane
-     * @param frame
-     * @return 
+     * @param jDesktopPane JDesktopPane
+     * @param frame JInternalFrame a ser verificado
+     * @return Boolean
      */
     public static Boolean verificaForm(JDesktopPane jDesktopPane,JInternalFrame frame) {
         Boolean valor = false;       
@@ -90,11 +90,10 @@ public class Uses {
     }      
     
     /**
-     * Apresenta a tela para apresentação de informações de pesquisa
-     * @param edt
-     * @param vCabecalho
-     * @param vCampos
-     * @param SQL 
+     * Apresenta as de informações de pesquisa
+     * @param edt JTextField da Pesquisa
+     * @param SQL SQL do BD
+     * @param classe Classe que está sendo Pesquisada
      */
     public static void ChamaTelaPesquisa(JTextField edt, String SQL, Class classe)    {
         formPesquisa pesq = new formPesquisa(edt, SQL, classe);
@@ -102,14 +101,12 @@ public class Uses {
         Uses.center(pesq);
         pesq.setVisible(true);
     }        
-    
-    
+        
     /**
      * Insere as informações de um Vector + SQL dentro das linhas do JTable
-     * @param grid
-     * @param cabecalho
-     * @param campos
-     * @param vSQL 
+     * @param grid Grid de Apresentação
+     * @param vSQL SQL do BD
+     * @param tabela  Classe a ser apresentada
      */
     public static void popularTabela(JTable grid, String vSQL, Class tabela){
         

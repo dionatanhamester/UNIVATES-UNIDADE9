@@ -30,7 +30,7 @@ public class CaixaDeDialogo {
     
     /**
      * Instancia a Caixa de Diálogo
-     * @return 
+     * @return  CaixaDeDialogo
      */
     public static CaixaDeDialogo obterInstancia() {
         return (instancia);
@@ -38,9 +38,9 @@ public class CaixaDeDialogo {
     
     /**
      * Apresenta uma mensagem na tela do usuário
-     * @param jframe
-     * @param frase
-     * @param tipo 
+     * @param jframe Frame
+     * @param frase Descrição da Mensagem
+     * @param tipo Tipo da Mensagem
      */
     public void exibirMensagem(JFrame jframe,String frase, char tipo) {
         exibirMensagem(jframe, frase, "Mensagem", tipo );
@@ -48,10 +48,10 @@ public class CaixaDeDialogo {
     
     /**
      * Apresenta uma mensagem na tela do usuário com ajuste na forma de apresentação ( erro, info, advertencia ou pergunta )
-     * @param jframe
-     * @param frase
-     * @param boxFrase
-     * @param tipo 
+     * @param jframe Frame
+     * @param frase Descrição da Mensagem
+     * @param boxFrase Box da Mensagem
+     * @param tipo Tipo da Mensagem
      */
     public void exibirMensagem(JFrame jframe, String frase, String boxFrase, char tipo) {
         /* Erro 'e'
@@ -66,9 +66,9 @@ public class CaixaDeDialogo {
      
     /**
      * Solicita a confirmação de uma açao para o usuário
-     * @param jframe
-     * @param frase
-     * @return 
+     * @param jframe Frame
+     * @param frase Descrição da Mensagem
+     * @return Boolean
      */
     public boolean pedirConfirmacao(JFrame jframe, String frase ) {
         return( pedirConfirmacao(jframe, frase, "Confirmação", 'p' ));
@@ -77,11 +77,11 @@ public class CaixaDeDialogo {
         
     /**
      * Solicitação a confirmação de uma ação para o usuário
-     * @param jframe
-     * @param frase
-     * @param boxFrase
-     * @param tipo
-     * @return 
+     * @param jframe Frame
+     * @param frase Descrição da Mensagem
+     * @param boxFrase box da mensagem
+     * @param tipo tipo de mensagem
+     * @return Boolean
      */
     public boolean pedirConfirmacao(JFrame jframe, String frase, String boxFrase, char tipo ) {
         String[] opcoes = { "Sim", "Não" };

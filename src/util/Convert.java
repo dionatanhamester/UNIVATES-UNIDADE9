@@ -28,10 +28,10 @@ public class Convert {
     
     /**
      * Realiza a Conversão de String para Date
-     * @param d
-     * @param format
-     * @return Date
-     * @throws ParseException 
+     * @param d Data
+     * @param format Formato da Data 
+     * @return Date Data Formatadada
+     * @throws ParseException Exception
      */
     public static Date stringToDate(String d, String format) throws ParseException{
         DateFormat formatter = new SimpleDateFormat(format);//"dd/MM/yyyy"
@@ -42,9 +42,9 @@ public class Convert {
     
     /**
      * Realiza a conversão de Date para  String
-     * @param date
-     * @param format
-     * @return String
+     * @param date Data
+     * @param format Formato da Data
+     * @return String Data Formatada
      */
     public static String dateToString(Date date, String format){
        SimpleDateFormat FORMAT = new SimpleDateFormat(format);

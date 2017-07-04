@@ -19,8 +19,8 @@ import javax.swing.JOptionPane;
         
         /**
          * Realiza o backup dos dados do sistema ( Backup realizado no diretório do sistema )
-         * @throws IOException
-         * @throws InterruptedException 
+         * @throws IOException Exception
+         * @throws InterruptedException Exceptio
          */
         public static void realizaBackup() throws IOException, InterruptedException{      
            final List<String> comandos = new ArrayList<String>();      
