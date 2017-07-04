@@ -27,7 +27,7 @@ public abstract class CustomDAO<T> {
     /**
      * Realiza o Insert no banco de dados
      * @param obj
-     * @return 
+     * @return Boolean
      */
     public Boolean Insert(T obj){
         Boolean vReturn = true;
@@ -54,7 +54,7 @@ public abstract class CustomDAO<T> {
     /**
      * Realiza o update no banco de dados
      * @param obj
-     * @return 
+     * @return Boolean
      */
     //public abstract Boolean Update(T obj);
     public Boolean Update(T obj){
@@ -79,7 +79,7 @@ public abstract class CustomDAO<T> {
     /**
      * Realiza o delete no banco de dados
      * @param obj
-     * @return 
+     * @return Boolean
      */
     public Boolean Delete(T obj){
         Boolean vReturn = true;
@@ -106,7 +106,7 @@ public abstract class CustomDAO<T> {
     /**
      * Realiza consulta SQL
      * @param sql
-     * @return
+     * @return Lista de Object´s
      * @throws SQLException 
      */
     public List<T> consultaSQL(String sql) {        
