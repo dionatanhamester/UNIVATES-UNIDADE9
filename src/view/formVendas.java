@@ -113,10 +113,10 @@ public class formVendas extends javax.swing.JInternalFrame {
         pedido.setPeobs("");
         
         if (pedido.getId() == null){
-            PedidosId idpedido = new PedidosId(
-                    Main.empresaSelecionada.getEmcodigo(), clientesDAO.getAutoIncrement());
+           // PedidosId idpedido = new PedidosId(
+             //       Main.empresaSelecionada.getEmcodigo(), clientesDAO.getAutoIncrement());
             
-            pedido.setId(idpedido);
+           // pedido.setId(idpedido);
             pedidosDAO.Insert(pedido);
         } else {
             pedidosDAO.Update(pedido);
