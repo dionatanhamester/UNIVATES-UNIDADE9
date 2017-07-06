@@ -6,6 +6,7 @@
 package view;
 
 
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.ResultSet;
@@ -32,6 +33,7 @@ import util.Uses;
 public class formInicial extends javax.swing.JFrame {
     public static JFrame jframe_inicial;
     
+    
     /**
      * Creates new form Inicial
      */
@@ -40,7 +42,7 @@ public class formInicial extends javax.swing.JFrame {
         setExtendedState(MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
         jframe_inicial = formInicial.this;
-        getContentPane().add(jDesktopPane1);
+        getContentPane().add(jDesktopPane1);        
     }
 
     /**

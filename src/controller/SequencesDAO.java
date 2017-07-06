@@ -12,6 +12,7 @@ import classes.Grupos;
 import classes.Produtos;
 import classes.Sequences;
 import classes.Tabelaprecos;
+import classes.Usuario;
 import java.util.List;
 import org.hibernate.Query;
 import util.HibernateUtil;
@@ -48,10 +49,13 @@ public class SequencesDAO extends CustomDAO<Sequences>{
            } else if ( table.equals(Tabelaprecos.class)){
                vID = seq.getGentabelaprecos();
                seq.setGentabelaprecos(vID+1);
-           }  else if ( table.equals(Formaspgto.class)){
+           } else if ( table.equals(Formaspgto.class)){
                vID = seq.getGenformaspgto();
                seq.setGenformaspgto(vID+1);
-           }                       
+           }else if ( table.equals(Usuario.class)){
+               vID = seq.getGenusuario();
+               seq.setGenusuario(vID+1);
+           }                                      
            
            SequencesDAO sequencesDAO = new SequencesDAO();
            sequencesDAO.Update(seq);

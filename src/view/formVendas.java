@@ -12,6 +12,7 @@ import java.util.Vector;
 import classes.Clientes;
 import classes.Formaspgto;
 import classes.Itenspedido;
+import classes.ItenspedidoId;
 
 import classes.Pedidos;
 import classes.PedidosId;
@@ -93,6 +94,7 @@ public class formVendas extends javax.swing.JInternalFrame {
         campos.set(1, "PRNOME");
         campos.set(2, "IPVALORTOTAL");
         
+        //Uses.popularTabela(gridDetalhes, cabecalho, campos, vSQL);
     }
     
     /*
@@ -112,11 +114,12 @@ public class formVendas extends javax.swing.JInternalFrame {
         pedido.setPeformapgto(formapgto.getId().getFpcodigo());
         pedido.setPeobs("");
         
-        if (pedido.getId() == null){
-           // PedidosId idpedido = new PedidosId(
-             //       Main.empresaSelecionada.getEmcodigo(), clientesDAO.getAutoIncrement());
+        if (pedido.getId() == null){ //(int peusuario, int peempresa, int pepedido) {
+            PedidosId idpedido = new PedidosId(Main.usuarioAcessado.getId().getUscodigo(),
+                                               Main.empresaSelecionada.getEmcodigo(), 
+                                               pedidosDAO.getAutoIncrement());
             
-           // pedido.setId(idpedido);
+            pedido.setId(idpedido);
             pedidosDAO.Insert(pedido);
         } else {
             pedidosDAO.Update(pedido);
@@ -126,21 +129,54 @@ public class formVendas extends javax.swing.JInternalFrame {
     /*
     Responsável por Salvar dos dados inseridos ou alterados pelo Usuário
     */
-    private void salvarDadosItens() throws Exception{
-                                 
+    private void salvarDadosItens() throws Exception{                
+        itensPedido.setIptabelapreco(tabelaprecosdetalhes.getId().getTdtabelapreco());
+        itensPedido.setIpquantidade(BigDecimal.valueOf(Double.valueOf(Ed_Quantidade.getText().trim())));
+        itensPedido.setIpvalorunit(BigDecimal.valueOf(Double.valueOf(Ed_ValorUnit.getText().trim())));      
+        
+        BigDecimal valorTotal = BigDecimal.valueOf(Double.valueOf(Ed_ValorUnit.getText().trim()) *
+                                                   Double.valueOf(Ed_Quantidade.getText().trim()));
+        itensPedido.setIpvalortotal(valorTotal);
+        
+        if (itensPedido.getId() == null){      
+            //int ipemresa, int ipusuario, int ippedido, int ipproduto) {
+            ItenspedidoId id = new ItenspedidoId(Main.empresaSelecionada.getEmcodigo(),
+                                                 Main.usuarioAcessado.getId().getUscodigo(),
+                                                 pedido.getId().getPepedido(),
+                                                 produtoSelecionado.getId().getPrcodigo());
+            itensPedido.setId(id);
+            itenspedidoDAO.Insert(itensPedido);
+        } else {
+            itenspedidoDAO.Update(itensPedido);
+        }                                           
     }
     
     /*
     Responsável por apresentar os dados na tela do usuário
     */
     private void setDataPedidos(){          
-       
+        Ed_Codigo.setText(String.valueOf(pedido.getId().getPepedido()));
+        Ed_Cliente.setText(String.valueOf(pedido.getPecliente()));
+        Ed_NomCliente.setText(cliente.getClnome());
+        Ed_Duracao.setText(String.valueOf(pedido.getPeduracao()));
+        Ed_ProducaoTotal.setText(String.valueOf(pedido.getPeproducaoleite()));
+        Ed_PesoVivo.setText(String.valueOf(pedido.getPepesovivo()));
+        Ed_Lactantes.setText(String.valueOf(pedido.getPenrolactantes()));
+        Ed_PreParto.setText(String.valueOf(pedido.getPenropreparto()));
+        Ed_Novilhas.setText(String.valueOf(pedido.getPenronovilhas()));
+        Ed_Terneiras2.setText(String.valueOf(pedido.getPenroterneiras2mes()));
+        Ed_Terneiras6.setText(String.valueOf(pedido.getPenroterneiras6mes()));
+        Ed_FormasPgto.setText(String.valueOf(pedido.getPeformapgto()));         
     }
         /*
     Responsável por apresentar os dados na tela do usuário
     */
     private void setDataItensPedido(){     
-       
+        Ed_Produto.setText(String.valueOf(itensPedido.getId().getIpproduto()));
+        Ed_NomProduto.setText(produtoSelecionado.getPrnome());
+        Ed_Quantidade.setText(String.valueOf(itensPedido.getIpquantidade()));   
+        Ed_Tabela.setText(String.valueOf(itensPedido.getIptabelapreco()));        
+        Ed_ValorUnit.setText(String.valueOf(itensPedido.getIpvalortotal()));        
     }
     /**
      * Retira todas as informações de dados que podem estar sendo apresentadas ao usuário
@@ -1056,8 +1092,7 @@ public class formVendas extends javax.swing.JInternalFrame {
           pedido = new Pedidos();          
           limpaTelaPedidos();  
           Tab_Selecao.setSelectedIndex(1);
-          Ed_Cliente.grabFocus();
-          
+          Ed_Cliente.grabFocus();          
         } else if (jTabbedPane.getSelectedIndex() == 1)/*Itens Pedido*/{
           //  itensPedido = new ItensPedido();
             

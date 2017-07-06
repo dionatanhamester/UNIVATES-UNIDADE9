@@ -93,7 +93,7 @@ public class Uses {
      * Apresenta as de informações de pesquisa
      * @param edt JTextField da Pesquisa
      * @param SQL SQL do BD
-     * @param classe Classe que está sendo Pesquisada
+     * @param classe Classe que está sendo Pesquisadaa
      */
     public static void ChamaTelaPesquisa(JTextField edt, String SQL, Class classe)    {
         formPesquisa pesq = new formPesquisa(edt, SQL, classe);
