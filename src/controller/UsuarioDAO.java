@@ -20,7 +20,7 @@ public class UsuarioDAO extends CustomDAO<Usuario>{
     }
         
     public Usuario validaLogin(String usuario, String senha){
-        String vSQL = "FROM Usuario where upper(usemail) = '"+usuario + "' and upper(ussenhamd5) = '"+senha+"'";
+        String vSQL = "FROM Usuario where upper(ususuario) = '"+usuario + "' and upper(ussenha) = '"+senha+"'";
         UsuarioDAO usuarioDAO = new UsuarioDAO();                
         List<Usuario> listData = usuarioDAO.consultaSQL(vSQL);
         

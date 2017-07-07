@@ -6,11 +6,13 @@
 package util;
 
 
+import application.Main;
 import controller.ClientesDAO;
 import classes.Clientes;
 import classes.Empresa;
 import classes.Formaspgto;
 import classes.Grupos;
+import classes.Itenspedido;
 import classes.Pedidos;
 import classes.Produtos;
 import classes.Tabelaprecos;
@@ -18,6 +20,7 @@ import classes.Tabelaprecosdetalhes;
 import controller.EmpresaDAO;
 import controller.FormasPgtoDAO;
 import controller.GruposDAO;
+import controller.ItensPedidoDAO;
 import controller.PedidosDAO;
 import controller.ProdutosDAO;
 import controller.TabelaPrecosDAO;
@@ -256,6 +259,31 @@ public class Uses {
                     
                      linha.add(String.valueOf(listData.get(i).getId().getPepedido()));
                      linha.add(clie.getClnome());                                  
+                     
+                     dadosTabela.add(linha);
+                }                
+            }else if (tabela.equals(Itenspedido.class)){                                                
+                    cabecalho.setSize(3);
+                    cabecalho.set(0, "Código");
+                    cabecalho.set(1, "Nome");
+                    cabecalho.set(2, "Valor Total");                    
+                    campos.setSize(3);
+                    campos.set(0, "IPPRODUTO");
+                    campos.set(1, "PRNOME");
+                    campos.set(2, "IPVALORTOTAL");   
+                
+                ItensPedidoDAO itensPedidoDAO = new ItensPedidoDAO();                
+                List<Itenspedido> listData = itensPedidoDAO.consultaSQL(vSQL);
+                
+                for (int i = 0; i < listData.size(); i++){                    
+                    Vector<Object> linha = new Vector<Object>();                                                            
+                    
+                    ProdutosDAO produtosDAO = new ProdutosDAO();                    
+                    Produtos prod = produtosDAO.getProduto(Main.empresaSelecionada.getEmcodigo(), listData.get(i).getId().getIpproduto());
+                    
+                     linha.add(String.valueOf(listData.get(i).getId().getIpproduto()));
+                     linha.add(prod.getPrnome());
+                     linha.add(String.valueOf(listData.get(i).getIpvalortotal()));                                  
                      
                      dadosTabela.add(linha);
                 }                

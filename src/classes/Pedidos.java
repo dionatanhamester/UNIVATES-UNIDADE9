@@ -1,5 +1,5 @@
 package classes;
-// Generated 27/06/2017 20:29:37 by Hibernate Tools 4.3.1
+// Generated 06/07/2017 22:21:10 by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -15,7 +15,6 @@ public class Pedidos  implements java.io.Serializable {
 
      private PedidosId id;
      private Empresa empresa;
-     private Usuario usuario;
      private int pecliente;
      private Integer peduracao;
      private BigDecimal peproducaoleite;
@@ -39,19 +38,17 @@ public class Pedidos  implements java.io.Serializable {
     }
 
 	
-    public Pedidos(PedidosId id, Empresa empresa, Usuario usuario, int pecliente, Date pedataatu, Date pehoraatu, int peformapgto) {
+    public Pedidos(PedidosId id, Empresa empresa, int pecliente, Date pedataatu, Date pehoraatu, int peformapgto) {
         this.id = id;
         this.empresa = empresa;
-        this.usuario = usuario;
         this.pecliente = pecliente;
         this.pedataatu = pedataatu;
         this.pehoraatu = pehoraatu;
         this.peformapgto = peformapgto;
     }
-    public Pedidos(PedidosId id, Empresa empresa, Usuario usuario, int pecliente, Integer peduracao, BigDecimal peproducaoleite, BigDecimal pepesovivo, Integer penrolactantes, Integer penropreparto, Integer penronovilhas, Integer penroterneiras2mes, Integer penroterneiras6mes, BigDecimal pevalortotal, String peobs, String pecancelado, Date pedataatu, Date pehoraatu, Date pedata, int peformapgto, String pemotivocancelamento, Set itenspedidos) {
+    public Pedidos(PedidosId id, Empresa empresa, int pecliente, Integer peduracao, BigDecimal peproducaoleite, BigDecimal pepesovivo, Integer penrolactantes, Integer penropreparto, Integer penronovilhas, Integer penroterneiras2mes, Integer penroterneiras6mes, BigDecimal pevalortotal, String peobs, String pecancelado, Date pedataatu, Date pehoraatu, Date pedata, int peformapgto, String pemotivocancelamento, Set itenspedidos) {
        this.id = id;
        this.empresa = empresa;
-       this.usuario = usuario;
        this.pecliente = pecliente;
        this.peduracao = peduracao;
        this.peproducaoleite = peproducaoleite;
@@ -85,13 +82,6 @@ public class Pedidos  implements java.io.Serializable {
     
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
-    }
-    public Usuario getUsuario() {
-        return this.usuario;
-    }
-    
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
     }
     public int getPecliente() {
         return this.pecliente;

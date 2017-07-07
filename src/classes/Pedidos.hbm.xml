@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 27/06/2017 20:29:40 by Hibernate Tools 4.3.1 -->
+<!-- Generated 06/07/2017 22:21:12 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="classes.Pedidos" table="pedidos" schema="public" optimistic-lock="version">
         <composite-id name="id" class="classes.PedidosId">
@@ -16,10 +16,6 @@
             </key-property>
         </composite-id>
         <many-to-one name="empresa" class="classes.Empresa" update="false" insert="false" fetch="select">
-            <column name="peempresa" not-null="true" />
-        </many-to-one>
-        <many-to-one name="usuario" class="classes.Usuario" update="false" insert="false" fetch="select">
-            <column name="peusuario" not-null="true" />
             <column name="peempresa" not-null="true" />
         </many-to-one>
         <property name="pecliente" type="int">
@@ -77,7 +73,7 @@
             <key>
                 <column name="ipusuario" not-null="true" />
                 <column name="ippedido" not-null="true" />
-                <column name="ipemresa" not-null="true" />
+                <column name="ipempresa" not-null="true" />
             </key>
             <one-to-many class="classes.Itenspedido" />
         </set>

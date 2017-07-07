@@ -41,15 +41,15 @@ Contributor(s):
 -->
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="dbvendas"/>
-  <table-filter match-name="itenspedido"/>
-  <table-filter match-name="empresa"/>
-  <table-filter match-name="tabelaprecosdetalhes"/>
-  <table-filter match-name="grupos"/>
-  <table-filter match-name="produtos"/>
-  <table-filter match-name="sequences"/>
   <table-filter match-name="formaspgto"/>
   <table-filter match-name="tabelaprecos"/>
-  <table-filter match-name="usuario"/>
+  <table-filter match-name="itenspedido"/>
   <table-filter match-name="pedidos"/>
+  <table-filter match-name="empresa"/>
+  <table-filter match-name="tabelaprecosdetalhes"/>
+  <table-filter match-name="usuario"/>
   <table-filter match-name="clientes"/>
+  <table-filter match-name="sequences"/>
+  <table-filter match-name="produtos"/>
+  <table-filter match-name="grupos"/>
 </hibernate-reverse-engineering>

@@ -921,7 +921,7 @@ public class formTabelaPrecos extends javax.swing.JInternalFrame {
     private void arrumaBotoes(String estado)
     {
         //modificação quer dizer que a tabela vai estar em modo de edição ou inserção
-        if (estado.equals(_MODIFICACAO))        {
+        if (estado.equals(_MODIFICACAO)){
             BotaoNovo.setEnabled(false);
             BotaoGrava.setEnabled(true);
             BotaoCancela.setEnabled(true);

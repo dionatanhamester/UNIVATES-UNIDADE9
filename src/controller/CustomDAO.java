@@ -38,7 +38,7 @@ public abstract class CustomDAO<T> {
             sessao.save(obj);                        
             transaction.commit();
         } catch (Exception ex){
-            
+            System.out.print("####ERROR: "+ ex.getMessage());
             transaction.rollback();
             vReturn = false;
         } finally {
@@ -64,7 +64,8 @@ public abstract class CustomDAO<T> {
         try{                        
             sessao.update(obj);                        
             transaction.commit();
-        } catch (Exception ex){            
+        } catch (Exception ex){     
+            System.out.print("####ERROR: "+ ex.getMessage());
             transaction.rollback();
             vReturn = false;
         } finally {
@@ -90,7 +91,7 @@ public abstract class CustomDAO<T> {
             sessao.delete(obj);                        
             transaction.commit();
         } catch (Exception ex){
-            
+            System.out.print("####ERROR: "+ ex.getMessage());
             transaction.rollback();
             vReturn = false;
         } finally {

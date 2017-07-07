@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 27/06/2017 20:29:40 by Hibernate Tools 4.3.1 -->
+<!-- Generated 06/07/2017 22:21:12 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="classes.Usuario" table="usuario" schema="public" optimistic-lock="version">
         <composite-id name="id" class="classes.UsuarioId">
@@ -18,45 +18,14 @@
         <property name="usnome" type="string">
             <column name="usnome" length="50" />
         </property>
-        <property name="uscpf" type="string">
-            <column name="uscpf" length="11" />
+        <property name="ususuario" type="string">
+            <column name="ususuario" length="50" not-null="true" />
         </property>
-        <property name="uscnpj" type="string">
-            <column name="uscnpj" length="14" />
-        </property>
-        <property name="uscep" type="string">
-            <column name="uscep" length="9" />
-        </property>
-        <property name="usuf" type="string">
-            <column name="usuf" length="2" />
-        </property>
-        <property name="usbairro" type="string">
-            <column name="usbairro" length="30" />
-        </property>
-        <property name="uscidade" type="string">
-            <column name="uscidade" length="50" />
-        </property>
-        <property name="usendereco" type="string">
-            <column name="usendereco" length="100" not-null="true" />
-        </property>
-        <property name="usemail" type="string">
-            <column name="usemail" length="50" not-null="true" />
-        </property>
-        <property name="ustelefone" type="string">
-            <column name="ustelefone" length="20" />
-        </property>
-        <property name="ussenhamd5" type="string">
-            <column name="ussenhamd5" length="100" />
+        <property name="ussenha" type="string">
+            <column name="ussenha" length="100" />
         </property>
         <property name="ustipoacesso" type="string">
             <column name="ustipoacesso" length="10" />
         </property>
-        <set name="pedidoses" table="pedidos" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="peusuario" not-null="true" />
-                <column name="peempresa" not-null="true" />
-            </key>
-            <one-to-many class="classes.Pedidos" />
-        </set>
     </class>
 </hibernate-mapping>

@@ -9,6 +9,7 @@ import classes.Clientes;
 import classes.Empresa;
 import classes.Formaspgto;
 import classes.Grupos;
+import classes.Pedidos;
 import classes.Produtos;
 import classes.Sequences;
 import classes.Tabelaprecos;
@@ -55,7 +56,11 @@ public class SequencesDAO extends CustomDAO<Sequences>{
            }else if ( table.equals(Usuario.class)){
                vID = seq.getGenusuario();
                seq.setGenusuario(vID+1);
+           }else if ( table.equals(Pedidos.class)){
+               vID = seq.getGenpedidos();
+               seq.setGenpedidos(vID+1);
            }                                      
+           
            
            SequencesDAO sequencesDAO = new SequencesDAO();
            sequencesDAO.Update(seq);

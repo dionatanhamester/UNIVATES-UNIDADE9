@@ -1,5 +1,5 @@
 package classes;
-// Generated 27/06/2017 20:29:37 by Hibernate Tools 4.3.1
+// Generated 06/07/2017 22:21:10 by Hibernate Tools 4.3.1
 
 
 
@@ -9,7 +9,7 @@ package classes;
 public class ItenspedidoId  implements java.io.Serializable {
 
 
-     private int ipemresa;
+     private int ipempresa;
      private int ipusuario;
      private int ippedido;
      private int ipproduto;
@@ -17,19 +17,19 @@ public class ItenspedidoId  implements java.io.Serializable {
     public ItenspedidoId() {
     }
 
-    public ItenspedidoId(int ipemresa, int ipusuario, int ippedido, int ipproduto) {
-       this.ipemresa = ipemresa;
+    public ItenspedidoId(int ipempresa, int ipusuario, int ippedido, int ipproduto) {
+       this.ipempresa = ipempresa;
        this.ipusuario = ipusuario;
        this.ippedido = ippedido;
        this.ipproduto = ipproduto;
     }
    
-    public int getIpemresa() {
-        return this.ipemresa;
+    public int getIpempresa() {
+        return this.ipempresa;
     }
     
-    public void setIpemresa(int ipemresa) {
-        this.ipemresa = ipemresa;
+    public void setIpempresa(int ipempresa) {
+        this.ipempresa = ipempresa;
     }
     public int getIpusuario() {
         return this.ipusuario;
@@ -60,7 +60,7 @@ public class ItenspedidoId  implements java.io.Serializable {
 		 if ( !(other instanceof ItenspedidoId) ) return false;
 		 ItenspedidoId castOther = ( ItenspedidoId ) other; 
          
-		 return (this.getIpemresa()==castOther.getIpemresa())
+		 return (this.getIpempresa()==castOther.getIpempresa())
  && (this.getIpusuario()==castOther.getIpusuario())
  && (this.getIppedido()==castOther.getIppedido())
  && (this.getIpproduto()==castOther.getIpproduto());
@@ -69,7 +69,7 @@ public class ItenspedidoId  implements java.io.Serializable {
    public int hashCode() {
          int result = 17;
          
-         result = 37 * result + this.getIpemresa();
+         result = 37 * result + this.getIpempresa();
          result = 37 * result + this.getIpusuario();
          result = 37 * result + this.getIppedido();
          result = 37 * result + this.getIpproduto();
