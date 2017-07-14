@@ -17,6 +17,7 @@ import classes.Pedidos;
 import classes.Produtos;
 import classes.Tabelaprecos;
 import classes.Tabelaprecosdetalhes;
+import classes.Usuario;
 import controller.EmpresaDAO;
 import controller.FormasPgtoDAO;
 import controller.GruposDAO;
@@ -25,6 +26,7 @@ import controller.PedidosDAO;
 import controller.ProdutosDAO;
 import controller.TabelaPrecosDAO;
 import controller.TabelaPrecosDetalhesDAO;
+import controller.UsuarioDAO;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -307,6 +309,26 @@ public class Uses {
                      linha.add(String.valueOf(listData.get(i).getEmcodigo()));
                      linha.add(listData.get(i).getEmrazaosocial());                                  
                      linha.add(listData.get(i).getEmcnpj());                                  
+                     
+                     dadosTabela.add(linha);
+                }                
+            } else if (tabela.equals(Usuario.class)){                        
+                cabecalho.setSize(2);
+                cabecalho.setSize(2);
+                cabecalho.set(0, "Código");
+                cabecalho.set(1, "Nome");
+                campos.setSize(2);
+                campos.set(0, "USCODIGO");
+                campos.set(1, "USNOME");                        
+                
+                UsuarioDAO usuarioDAO = new UsuarioDAO();                
+                List<Usuario> listData = usuarioDAO.consultaSQL(vSQL);
+                
+                for (int i = 0; i < listData.size(); i++){                    
+                    Vector<Object> linha = new Vector<Object>();                                                            
+                                        
+                     linha.add(String.valueOf(listData.get(i).getId().getUscodigo()));
+                     linha.add(listData.get(i).getUsnome());                                                                    
                      
                      dadosTabela.add(linha);
                 }                

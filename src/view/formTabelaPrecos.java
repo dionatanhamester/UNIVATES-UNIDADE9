@@ -702,7 +702,7 @@ public class formTabelaPrecos extends javax.swing.JInternalFrame {
         if (jTabbedPane.getSelectedIndex() == 0)/*Tabela de Preços*/{            
             setDataTabelaPrecos();
         } else if (jTabbedPane.getSelectedIndex() == 0)/*Tabela de Preços - Detalhes*/{                 
-            
+           setDataTabelaPrecosDetalhes();
         }
     }//GEN-LAST:event_BotaoCancelaActionPerformed
  /*

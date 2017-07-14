@@ -26,7 +26,7 @@ import static view.formInicial.jframe_inicial;
 public class formParametros extends javax.swing.JInternalFrame {
     private final String _MODIFICACAO = "modificacao";
     private final String _DEFAULT     = "default";
-    
+    private int rowTabelaUsuariosClick = -1;
     private Empresa empresa       = null;
     private EmpresaDAO empresaDAO = new EmpresaDAO();
     
@@ -60,9 +60,6 @@ public class formParametros extends javax.swing.JInternalFrame {
         Ed_Endereco.setDocument(new JTextFieldLimit(100));
         Ed_Email.setDocument(new JTextFieldLimit(50));
         Ed_Fone.setDocument(new JTextFieldLimit(20));       
-        Cb_TipoAcesso.removeAllItems();
-        Cb_TipoAcesso.addItem("Normal");
-        Cb_TipoAcesso.addItem("Gerente");
     }
     
     /**
@@ -122,6 +119,7 @@ public class formParametros extends javax.swing.JInternalFrame {
      * @param vEstado 
      */
     private void permiteEdicao(boolean vEstado) {
+        
         if (jTabbedPane.getSelectedIndex() == 0)/*Empresa*/{                    
             Ed_CNPJ.setEditable(vEstado);
             Ed_RazaoSocial.setEditable(vEstado);
@@ -134,11 +132,11 @@ public class formParametros extends javax.swing.JInternalFrame {
             Ed_Fone.setEditable(vEstado);
             Ed_Email.setEditable(vEstado);            
         } else { /*Usuario*/
-            
+            Ed_Nome.setEditable(vEstado);     
+            Ed_Usuario.setEditable(vEstado);     
+            Ed_Senha.setEditable(vEstado);     
         }
-        
     }
-    
     
     /*
     Responsável por apresentar os dados na tela do usuário
@@ -211,8 +209,6 @@ public class formParametros extends javax.swing.JInternalFrame {
         jLabel45 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         gridDetalhes = new javax.swing.JTable();
-        jLabel46 = new javax.swing.JLabel();
-        Cb_TipoAcesso = new javax.swing.JComboBox<>();
         Ed_Senha = new javax.swing.JPasswordField();
         jPanel8 = new javax.swing.JPanel();
         BotaoNovo = new javax.swing.JButton();
@@ -506,6 +502,7 @@ public class formParametros extends javax.swing.JInternalFrame {
 
         jLabel35.setText("Nome");
 
+        Ed_Nome.setEditable(false);
         Ed_Nome.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 Ed_NomeFocusLost(evt);
@@ -522,6 +519,7 @@ public class formParametros extends javax.swing.JInternalFrame {
 
         jLabel44.setText("Senha");
 
+        Ed_Usuario.setEditable(false);
         Ed_Usuario.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 Ed_UsuarioFocusLost(evt);
@@ -568,9 +566,7 @@ public class formParametros extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(gridDetalhes);
 
-        jLabel46.setText("Tipo Acesso");
-
-        Cb_TipoAcesso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        Ed_Senha.setEditable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -583,16 +579,11 @@ public class formParametros extends javax.swing.JInternalFrame {
                     .addComponent(jLabel45, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel35, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(3, 3, 3)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Ed_Nome, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Ed_Usuario, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
-                            .addComponent(Ed_Senha))
-                        .addGap(93, 93, 93)
-                        .addComponent(jLabel46)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Cb_TipoAcesso, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(Ed_Usuario, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
+                        .addComponent(Ed_Senha)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BotaoEditar1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -614,20 +605,12 @@ public class formParametros extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Ed_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel45))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel44)
-                            .addComponent(Ed_Senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(11, 11, 11)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel46)
-                            .addComponent(Cb_TipoAcesso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                .addGap(6, 6, 6)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel44)
+                    .addComponent(Ed_Senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE))
         );
 
         jTabbedPane.addTab("Usuários", jPanel1);
@@ -740,6 +723,7 @@ public class formParametros extends javax.swing.JInternalFrame {
                         this.setDataEmpresa();
                         Tab_Selecao.setSelectedIndex(1);
                         arrumaBotoes(_DEFAULT);
+                        carregaGridUsuarios();
                     }
                 } catch (Exception ex) {
                     System.out.println(ex.getMessage());
@@ -748,6 +732,12 @@ public class formParametros extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_gridConsultaMouseClicked
 
+    private void carregaGridUsuarios(){
+        //Monta  SQL para trazer os dados                
+        String vSQL = "FROM Usuario where usempresa = "+String.valueOf(empresa.getEmcodigo());
+        Uses.popularTabela(gridDetalhes, vSQL, Usuario.class);                  
+    }
+    
     private void gridConsultaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_gridConsultaPropertyChange
         // TODO add your handling code here:
     }//GEN-LAST:event_gridConsultaPropertyChange
@@ -923,6 +913,7 @@ public class formParametros extends javax.swing.JInternalFrame {
                     mensagem.exibirMensagem(jframe_inicial,"Registro gravado com sucesso",'i');
                     arrumaBotoes(_DEFAULT);
                     BotaoNovo.grabFocus();
+                    carregaGridUsuarios();
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                     mensagem.exibirMensagem(jframe_inicial, "Não foi possível gravar as informações. Tente novamente mais tarde!", 'e');
@@ -966,7 +957,7 @@ public class formParametros extends javax.swing.JInternalFrame {
         usuario.setUsnome(Ed_Nome.getText().trim());
         usuario.setUsusuario(Ed_Usuario.getText().trim());
         usuario.setUssenha(Ed_Senha.getText().trim());
-        usuario.setUstipoacesso(Cb_TipoAcesso.getSelectedItem().toString());
+        usuario.setUstipoacesso("Normal");
                               
         if (usuario.getId() == null){                                    
             UsuarioId id = new UsuarioId(usuarioDAO.getAutoIncrement(), empresa.getEmcodigo());                      
@@ -984,7 +975,9 @@ public class formParametros extends javax.swing.JInternalFrame {
               setDataEmpresa();
            }  
         } else {
-            
+           if (usuario != null){
+              setDataUsuarios();
+           }   
         }                    
     }//GEN-LAST:event_BotaoCancelaActionPerformed
 
@@ -998,12 +991,13 @@ public class formParametros extends javax.swing.JInternalFrame {
                     limpaTelaEmpresa();
                     arrumaBotoes(_DEFAULT);    
                 } else if (jTabbedPane.getSelectedIndex() == 1)/*Usuários*/{
-                   //tabelaprecosdetalhesDAO.Delete(tabelaprecosdetalhes);
-                   //tabelaprecosdetalhes = null;
+                   usuarioDAO.Delete(usuario);
+                   usuario = null;
                    
-                   //limpaTelaTabelaPrecosDetalhes();
-                   //arrumaBotoes(_DEFAULT);
-                   //carregaGridTabelaPrecosDetalhes();
+                   limpaTelaUsuario();
+                   
+                   arrumaBotoes(_DEFAULT);
+                   carregaGridUsuarios();
                 }
            } catch (Exception erro){
                 mensagem.exibirMensagem(jframe_inicial,"Erro ao excluir a filial.Verifique" + erro.getMessage(),'e');
@@ -1020,7 +1014,7 @@ public class formParametros extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_Ed_NomeFocusLost
 
     private void BotaoEditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoEditar1ActionPerformed
-        // TODO add your handling code here:
+        arrumaBotoes(_MODIFICACAO);
     }//GEN-LAST:event_BotaoEditar1ActionPerformed
 
     private void Ed_UsuarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Ed_UsuarioFocusLost
@@ -1028,13 +1022,42 @@ public class formParametros extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_Ed_UsuarioFocusLost
 
     private void gridDetalhesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gridDetalhesMouseClicked
-       
+        rowTabelaUsuariosClick = gridDetalhes.getSelectedRow();
+        getUsuarios();       
     }//GEN-LAST:event_gridDetalhesMouseClicked
 
     private void gridDetalhesPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_gridDetalhesPropertyChange
         // TODO add your handling code here:
     }//GEN-LAST:event_gridDetalhesPropertyChange
 
+    private void setDataUsuarios(){          
+        Ed_Nome.setText(usuario.getUsnome());
+        Ed_Usuario.setText(usuario.getUsusuario());
+        Ed_Senha.setText(usuario.getUssenha());        
+    }
+    
+    private void getUsuarios(){
+        //Posiciona certo no registro que o usuario clicou
+        String vSQL = "From Usuario "
+                     + "where "
+                     + " usempresa = "+ String.valueOf(empresa.getEmcodigo())
+                     + " and uscodigo = "+ gridDetalhes.getValueAt(rowTabelaUsuariosClick, 0).toString();
+                        
+                try{
+                    List<Usuario> users = usuarioDAO.consultaSQL(vSQL);
+
+                    if (users.size() > 0){                            
+                        this.usuario = users.get(0);
+
+                        this.setDataUsuarios();                        
+                    } else
+                    {
+                        //como nao tem nada
+                    }                
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());                    
+                }              
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotaoCancela;
@@ -1044,7 +1067,6 @@ public class formParametros extends javax.swing.JInternalFrame {
     private javax.swing.JButton BotaoExcluir;
     private javax.swing.JButton BotaoGrava;
     private javax.swing.JButton BotaoNovo;
-    private javax.swing.JComboBox<String> Cb_TipoAcesso;
     private javax.swing.JFormattedTextField Ed_Bairro;
     private javax.swing.JTextField Ed_CNPJ;
     private javax.swing.JFormattedTextField Ed_Cep;
@@ -1081,7 +1103,6 @@ public class formParametros extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
-    private javax.swing.JLabel jLabel46;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
